@@ -1,0 +1,1100 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<template id="__bundler_thumbnail">
+<svg viewBox="0 0 120 90" xmlns="http://www.w3.org/2000/svg">
+  <rect width="120" height="90" fill="#cfc4ad"/>
+  <rect x="10" y="10" width="100" height="70" rx="6" fill="#efe7d6"/>
+  <rect x="20" y="18" width="80" height="20" fill="#b0843a"/>
+  <circle cx="30" cy="28" r="4" fill="#fff" opacity=".6"/>
+  <rect x="20" y="42" width="35" height="25" rx="3" fill="#5a3b22"/>
+  <rect x="60" y="42" width="35" height="25" rx="3" fill="#e9e6df"/>
+  <text x="60" y="75" font-size="9" font-weight="bold" fill="#8a6326" text-anchor="middle">أرضيات الديار</text>
+</svg>
+</template>
+
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Reem+Kufi:wght@400;500;600;700&family=El+Messiri:wght@500;600;700&family=Aref+Ruqaa:wght@400;700&family=Tajawal:wght@300;400;500;700;800&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  *{box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+  body{margin:0;background:#cfc4ad;}
+  @keyframes diyShimmer{0%{transform:translateX(-120%) rotate(8deg);}100%{transform:translateX(120%) rotate(8deg);}}
+  @keyframes diyScan{0%{top:6%;}100%{top:88%;}}
+  @keyframes diyFloat{0%,100%{transform:translateY(0);}50%{transform:translateY(-7px);}}
+  @keyframes diyFade{from{opacity:0;transform:translateY(14px);}to{opacity:1;transform:none;}}
+  @keyframes diyPulse{0%,100%{opacity:.5;}50%{opacity:1;}}
+  @keyframes diySpin{to{transform:rotate(360deg);}}
+  ::-webkit-scrollbar{width:0;height:0;}
+</style>
+</helmet>
+<div dir="{{ dir }}" style="{{ themeVars }}font-family:'Tajawal',sans-serif;max-width:480px;margin:0 auto;background:#efe7d6;min-height:100vh;position:relative;color:#2b281f;overflow:hidden;box-shadow:0 0 60px rgba(0,0,0,.18);">
+
+  <!-- HEADER -->
+  <header style="position:sticky;top:0;z-index:40;display:flex;align-items:center;justify-content:space-between;padding:13px 18px;background:rgba(239,231,214,.86);backdrop-filter:blur(12px);border-bottom:1px solid rgba(52,51,31,.1);">
+    <div style="display:flex;align-items:center;gap:9px;">
+      <div style="width:34px;height:34px;border-radius:9px;background:linear-gradient(135deg,var(--ac,#b0843a),var(--acd,#8a6326));display:flex;align-items:center;justify-content:center;box-shadow:0 4px 10px rgba(138,99,38,.32);">
+        <div style="width:15px;height:15px;border:1.8px solid #f6f0e3;transform:rotate(45deg);"></div>
+      </div>
+      <span style="font-family:var(--hf,'Reem Kufi'),serif;font-weight:700;font-size:18px;color:#34331f;letter-spacing:-.2px;">{{ t.brand }}</span>
+    </div>
+    <div style="display:flex;align-items:center;gap:8px;">
+      <button onClick="{{ toggleLang }}" style="font-family:var(--hf,'Reem Kufi'),serif;font-size:13px;font-weight:600;border:1px solid rgba(52,51,31,.2);background:transparent;color:#43412a;padding:6px 12px;border-radius:20px;cursor:pointer;">{{ t.langBtn }}</button>
+      <button onClick="{{ openWhats }}" style="display:flex;align-items:center;gap:5px;background:#25785a;color:#fff;border:0;padding:7px 12px;border-radius:20px;font-family:'Tajawal',sans-serif;font-weight:700;font-size:12px;cursor:pointer;box-shadow:0 4px 10px rgba(37,120,90,.3);">
+        <span style="width:7px;height:7px;border-radius:50%;background:#7fe3b8;animation:diyPulse 1.6s infinite;"></span>{{ t.whatsapp }}
+      </button>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section style="position:relative;padding:22px 18px 26px;overflow:hidden;">
+    <div style="position:absolute;inset:0;opacity:var(--pat,.5);background-image:repeating-linear-gradient(45deg,rgba(176,132,58,.14) 0 1px,transparent 1px 22px),repeating-linear-gradient(-45deg,rgba(176,132,58,.14) 0 1px,transparent 1px 22px);"></div>
+    <div style="position:relative;">
+      <div style="display:inline-flex;align-items:center;gap:6px;background:rgba(176,132,58,.14);color:var(--acd,#8a6326);padding:5px 11px;border-radius:20px;font-size:11px;font-weight:700;margin-bottom:13px;">
+        <span style="width:6px;height:6px;border-radius:50%;background:var(--ac,#b0843a);"></span>{{ t.heroEyebrow }}
+      </div>
+      <h1 style="font-family:var(--hf,'Reem Kufi'),serif;font-size:30px;line-height:1.18;margin:0 0 10px;color:#2b281f;font-weight:700;text-wrap:balance;">{{ t.heroTitle }}</h1>
+      <p style="margin:0 0 16px;font-size:15px;font-weight:500;line-height:1.7;color:#433f30;max-width:92%;">{{ t.heroSub }}</p>
+
+      <!-- ROOM PREVIEW -->
+      <div style="position:relative;border-radius:18px;overflow:hidden;border:1px solid rgba(52,51,31,.12);box-shadow:0 18px 40px -18px rgba(43,40,31,.5);">
+        <div style="position:relative;height:236px;background:{{ room.wall }};transition:background .5s;">
+          <!-- ambient light -->
+          <div style="position:absolute;inset:0;background:radial-gradient(120% 80% at 70% 0%,rgba(255,250,238,.5),transparent 60%);"></div>
+          <!-- window -->
+          <div style="position:absolute;top:24px;{{ room.winSide }}:30px;width:78px;height:96px;background:linear-gradient(160deg,#eaf4f7,#cfe0e6);border:5px solid {{ room.frame }};border-radius:4px;box-shadow:0 8px 18px rgba(0,0,0,.12);overflow:hidden;">
+            <div style="position:absolute;left:50%;top:0;bottom:0;width:4px;background:{{ room.frame }};transform:translateX(-50%);"></div>
+            <div style="position:absolute;top:50%;left:0;right:0;height:4px;background:{{ room.frame }};transform:translateY(-50%);"></div>
+          </div>
+          <!-- decor silhouette -->
+          <div style="position:absolute;bottom:30%;{{ room.decorSide }}:18px;width:34px;height:64px;background:{{ room.decor }};border-radius:6px 6px 3px 3px;opacity:.9;"></div>
+          <!-- floor -->
+          <div style="position:absolute;left:-32%;right:-32%;bottom:0;height:64%;transform:perspective(440px) rotateX(60deg);transform-origin:bottom center;background-color:{{ heroFloorColor }};box-shadow:inset 0 40px 60px -30px rgba(0,0,0,.45);transition:background-color .4s;">
+            <div style="position:absolute;inset:0;background:linear-gradient(0deg,rgba(0,0,0,.28),transparent 55%);"></div>
+            <div style="position:absolute;inset:0;background:radial-gradient(60% 50% at 60% 40%,rgba(255,247,230,.32),transparent);"></div>
+          </div>
+          <!-- floor name chip -->
+          <div style="position:absolute;bottom:12px;{{ room.winSide }}:14px;background:rgba(43,40,31,.78);color:#f6f0e3;padding:6px 12px;border-radius:20px;font-size:12px;font-weight:600;backdrop-filter:blur(4px);">{{ heroFloorName }}</div>
+        </div>
+        <!-- room tabs -->
+        <div style="display:flex;gap:6px;padding:9px;background:#f6f0e3;">
+          <sc-for list="{{ rooms }}" as="r" hint-placeholder-count="4">
+            <button onClick="{{ r.select }}" style="{{ r.style }}">{{ r.label }}</button>
+          </sc-for>
+        </div>
+      </div>
+
+      <!-- floor swatches -->
+      <div style="margin-top:14px;">
+        <div style="font-size:11px;font-weight:700;color:var(--acd,#8a6326);margin-bottom:8px;display:flex;align-items:center;gap:6px;"><span style="width:14px;height:1px;background:var(--ac,#b0843a);"></span>{{ t.heroSwatchLabel }}</div>
+        <div style="display:flex;gap:9px;overflow-x:auto;padding-bottom:4px;">
+          <sc-for list="{{ heroFloors }}" as="f" hint-placeholder-count="5">
+            <button onClick="{{ f.select }}" title="{{ f.name }}" style="{{ f.style }}"></button>
+          </sc-for>
+        </div>
+      </div>
+
+      <div style="display:flex;gap:10px;margin-top:18px;">
+        <button onClick="{{ goAR }}" style="flex:1;background:linear-gradient(135deg,var(--ac,#b0843a),var(--acd,#8a6326));color:#fff;border:0;padding:13px;border-radius:13px;font-family:'Tajawal',sans-serif;font-weight:700;font-size:14px;cursor:pointer;box-shadow:0 10px 22px -8px rgba(138,99,38,.6);">{{ t.ctaTry }}</button>
+        <button onClick="{{ goAdvisor }}" style="flex:1;background:#fff;color:#43412a;border:1px solid rgba(52,51,31,.18);padding:13px;border-radius:13px;font-family:'Tajawal',sans-serif;font-weight:700;font-size:14px;cursor:pointer;">{{ t.ctaAdvisor }}</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- AR SECTION -->
+  <section id="ar" style="padding:26px 18px;background:#2b281f;color:#f6f0e3;position:relative;">
+    <div style="position:absolute;inset:0;opacity:var(--patD,.18);background-image:repeating-linear-gradient(45deg,rgba(201,162,75,.5) 0 1px,transparent 1px 20px),repeating-linear-gradient(-45deg,rgba(201,162,75,.5) 0 1px,transparent 1px 20px);"></div>
+    <div style="position:relative;">
+      <div style="font-size:11px;font-weight:700;color:var(--acl,#c9a24b);letter-spacing:1px;margin-bottom:6px;">AR · {{ t.arEyebrow }}</div>
+      <h2 style="font-family:var(--hf,'Reem Kufi'),serif;font-size:23px;margin:0 0 6px;color:#f6f0e3;">{{ t.arTitle }}</h2>
+      <p style="margin:0 0 16px;font-size:13px;color:#cabfa3;line-height:1.6;">{{ t.arSub }}</p>
+
+      <div style="display:flex;gap:6px;background:rgba(255,255,255,.06);padding:5px;border-radius:13px;margin-bottom:14px;">
+        <sc-for list="{{ arTabs }}" as="tab" hint-placeholder-count="3">
+          <button onClick="{{ tab.select }}" style="{{ tab.style }}">{{ tab.label }}</button>
+        </sc-for>
+      </div>
+
+      <!-- AR stage -->
+      <div ref="{{ arStageRef }}" style="position:relative;height:300px;border-radius:16px;overflow:hidden;background:#15140f;border:1px solid rgba(201,162,75,.3);">
+        <!-- upload image or video or demo room -->
+        <sc-if value="{{ arShowUpload }}" hint-placeholder-val="{{ true }}">
+          <div ref="{{ arUploadRef }}" style="position:absolute;inset:0;background-color:#1c1a14;background-size:cover;background-position:center;"></div>
+        </sc-if>
+        <sc-if value="{{ arShowEmpty }}" hint-placeholder-val="{{ true }}">
+          <div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;text-align:center;padding:24px;">
+            <div style="width:54px;height:54px;border-radius:14px;border:2px dashed rgba(201,162,75,.5);display:flex;align-items:center;justify-content:center;">
+              <div style="width:18px;height:18px;border:2px solid var(--acl,#c9a24b);transform:rotate(45deg);"></div>
+            </div>
+            <p style="margin:0;font-size:13px;color:#cabfa3;max-width:80%;line-height:1.5;">{{ t.arUploadHint }}</p>
+          </div>
+        </sc-if>
+        <sc-if value="{{ arShowVideo }}" hint-placeholder-val="{{ true }}">
+          <video ref="{{ arVideoRef }}" autoplay playsinline muted style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;"></video>
+        </sc-if>
+        <sc-if value="{{ arShowDemo }}" hint-placeholder-val="{{ true }}">
+          <div style="position:absolute;inset:0;background:linear-gradient(170deg,#cdbfa6,#9d8e72);">
+            <div style="position:absolute;top:30px;left:50%;transform:translateX(-50%);width:90px;height:64px;background:linear-gradient(160deg,#eaf4f7,#bcd0d6);border:5px solid #efe7d6;border-radius:4px;"></div>
+          </div>
+        </sc-if>
+
+        <!-- floor overlay -->
+        <sc-if value="{{ arFloorVisible }}" hint-placeholder-val="{{ true }}">
+          <div style="position:absolute;left:0;right:0;bottom:0;top:{{ arLinePct }}%;overflow:hidden;">
+            <div style="position:absolute;left:-30%;right:-30%;top:0;bottom:0;transform:perspective(360px) rotateX(64deg);transform-origin:top center;background-color:{{ arFloorColor }};mix-blend-mode:multiply;opacity:.92;"></div>
+            <div style="position:absolute;inset:0;background:linear-gradient(0deg,rgba(0,0,0,.25),transparent 60%);"></div>
+          </div>
+        </sc-if>
+
+        <!-- AR HUD for demo/camera -->
+        <sc-if value="{{ arHud }}" hint-placeholder-val="{{ true }}">
+          <div style="position:absolute;inset:14px;pointer-events:none;">
+            <div style="position:absolute;top:0;left:0;width:22px;height:22px;border-top:2px solid var(--acl,#c9a24b);border-left:2px solid var(--acl,#c9a24b);"></div>
+            <div style="position:absolute;top:0;right:0;width:22px;height:22px;border-top:2px solid var(--acl,#c9a24b);border-right:2px solid var(--acl,#c9a24b);"></div>
+            <div style="position:absolute;bottom:0;left:0;width:22px;height:22px;border-bottom:2px solid var(--acl,#c9a24b);border-left:2px solid var(--acl,#c9a24b);"></div>
+            <div style="position:absolute;bottom:0;right:0;width:22px;height:22px;border-bottom:2px solid var(--acl,#c9a24b);border-right:2px solid var(--acl,#c9a24b);"></div>
+            <div style="position:absolute;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--acl,#c9a24b),transparent);animation:diyScan 2.6s ease-in-out infinite alternate;"></div>
+            <div style="position:absolute;top:6px;right:6px;background:rgba(201,162,75,.92);color:#2b281f;font-size:10px;font-weight:800;padding:3px 8px;border-radius:10px;">AR LIVE</div>
+          </div>
+        </sc-if>
+
+        <!-- draggable edge handle (upload) -->
+        <sc-if value="{{ arShowUpload }}" hint-placeholder-val="{{ true }}">
+          <div onPointerDown="{{ startLineDrag }}" style="position:absolute;left:0;right:0;top:{{ arLinePct }}%;height:30px;transform:translateY(-50%);cursor:ns-resize;display:flex;align-items:center;z-index:5;">
+            <div style="position:absolute;left:0;right:0;height:2px;background:var(--acl,#c9a24b);box-shadow:0 0 10px rgba(201,162,75,.8);"></div>
+            <div style="margin:0 auto;background:var(--acl,#c9a24b);color:#2b281f;font-size:10px;font-weight:800;padding:3px 10px;border-radius:20px;display:flex;align-items:center;gap:5px;">↕ {{ t.arDragLabel }}</div>
+          </div>
+        </sc-if>
+
+        <!-- camera denied -->
+        <sc-if value="{{ arDenied }}" hint-placeholder-val="{{ true }}">
+          <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;text-align:center;padding:24px;background:rgba(21,20,15,.9);">
+            <p style="margin:0;font-size:13px;color:#e9c97e;line-height:1.6;">{{ t.arCamDenied }}</p>
+          </div>
+        </sc-if>
+      </div>
+
+      <!-- AR controls -->
+      <div style="display:flex;gap:8px;margin-top:12px;flex-wrap:wrap;">
+        <sc-if value="{{ arIsUpload }}" hint-placeholder-val="{{ true }}">
+          <label style="flex:1;min-width:120px;text-align:center;background:var(--acl,#c9a24b);color:#2b281f;padding:11px;border-radius:11px;font-weight:700;font-size:13px;cursor:pointer;">
+            {{ t.arPick }}<input type="file" accept="image/*" onChange="{{ onArUpload }}" style="display:none;">
+          </label>
+          <button onClick="{{ saveAR }}" style="flex:1;min-width:120px;background:rgba(255,255,255,.1);color:#f6f0e3;border:1px solid rgba(201,162,75,.4);padding:11px;border-radius:11px;font-weight:700;font-size:13px;cursor:pointer;">{{ t.arSave }}</button>
+        </sc-if>
+        <sc-if value="{{ arIsCam }}" hint-placeholder-val="{{ true }}">
+          <button onClick="{{ startCam }}" style="flex:1;background:var(--acl,#c9a24b);color:#2b281f;border:0;padding:11px;border-radius:11px;font-weight:700;font-size:13px;cursor:pointer;">{{ t.arCamStart }}</button>
+        </sc-if>
+      </div>
+
+      <!-- AR floor swatches -->
+      <div style="display:flex;align-items:center;gap:8px;margin-top:12px;">
+        <button onClick="{{ arScrollStart }}" aria-label="prev" style="flex-shrink:0;width:32px;height:32px;border-radius:50%;border:1px solid rgba(201,162,75,.4);background:rgba(255,255,255,.08);color:var(--acl,#c9a24b);font-size:15px;cursor:pointer;display:flex;align-items:center;justify-content:center;">‹</button>
+        <div ref="{{ arFloorsRef }}" style="flex:1;display:flex;gap:9px;overflow-x:auto;padding-bottom:4px;scroll-behavior:smooth;">
+          <sc-for list="{{ arFloors }}" as="f" hint-placeholder-count="6">
+            <button onClick="{{ f.select }}" title="{{ f.name }}" style="{{ f.style }}"></button>
+          </sc-for>
+        </div>
+        <button onClick="{{ arScrollEnd }}" aria-label="next" style="flex-shrink:0;width:32px;height:32px;border-radius:50%;border:1px solid rgba(201,162,75,.4);background:rgba(255,255,255,.08);color:var(--acl,#c9a24b);font-size:15px;cursor:pointer;display:flex;align-items:center;justify-content:center;">›</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- AI ADVISOR -->
+  <section id="advisor" style="padding:26px 18px;">
+    <div style="font-size:11px;font-weight:700;color:var(--acd,#8a6326);letter-spacing:.5px;margin-bottom:6px;">SMART · {{ t.advisorEyebrow }}</div>
+    <h2 style="font-family:'El Messiri',serif;font-weight:700;font-size:24px;margin:0 0 5px;color:#2b281f;">{{ t.advisorTitle }}</h2>
+    <p style="margin:0 0 16px;font-size:13px;color:#6b6450;line-height:1.6;">{{ t.advisorSub }}</p>
+
+    <div style="background:#fff;border:1px solid rgba(52,51,31,.1);border-radius:18px;padding:18px;box-shadow:0 14px 34px -22px rgba(43,40,31,.4);">
+      <sc-if value="{{ advisorActive }}" hint-placeholder-val="{{ true }}">
+        <div>
+          <div style="display:flex;gap:5px;margin-bottom:16px;">
+            <sc-for list="{{ advisorBars }}" as="b" hint-placeholder-count="4">
+              <div style="{{ b.style }}"></div>
+            </sc-for>
+          </div>
+          <div style="font-size:11px;color:var(--acd,#8a6326);font-weight:700;margin-bottom:8px;">{{ advisorStepLabel }}</div>
+          <h3 style="font-family:var(--hf,'Reem Kufi'),serif;font-size:18px;margin:0 0 14px;color:#2b281f;">{{ advisorQ }}</h3>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:9px;">
+            <sc-for list="{{ advisorOptions }}" as="o" hint-placeholder-count="4">
+              <button onClick="{{ o.select }}" style="{{ o.style }}">{{ o.label }}</button>
+            </sc-for>
+          </div>
+        </div>
+      </sc-if>
+      <sc-if value="{{ advisorDone }}" hint-placeholder-val="{{ true }}">
+        <div>
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;">
+            <h3 style="font-family:var(--hf,'Reem Kufi'),serif;font-size:19px;margin:0;color:#2b281f;">{{ t.advisorResultTitle }}</h3>
+            <button onClick="{{ restartAdvisor }}" style="font-size:12px;color:var(--acd,#8a6326);background:rgba(176,132,58,.12);border:0;padding:6px 12px;border-radius:18px;font-weight:700;cursor:pointer;">↺ {{ t.advisorRestart }}</button>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:11px;">
+            <sc-for list="{{ advisorResults }}" as="rec" hint-placeholder-count="3">
+              <div style="display:flex;gap:12px;align-items:center;padding:11px;border:1px solid rgba(52,51,31,.1);border-radius:14px;background:#faf6ec;">
+                <div onClick="{{ rec.zoom }}" style="width:58px;height:58px;border-radius:11px;flex-shrink:0;cursor:pointer;background-color:{{ rec.color }};border:1px solid rgba(52,51,31,.12);"></div>
+                <div style="flex:1;min-width:0;">
+                  <div style="display:flex;align-items:center;gap:7px;margin-bottom:3px;">
+                    <span style="font-weight:700;font-size:14px;color:#2b281f;">{{ rec.name }}</span>
+                    <span style="font-size:11px;font-weight:800;color:#25785a;background:rgba(37,120,90,.12);padding:2px 7px;border-radius:10px;">{{ rec.pct }}% {{ t.advisorMatch }}</span>
+                  </div>
+                  <p style="margin:0;font-size:11.5px;color:#6b6450;line-height:1.5;">{{ rec.reason }}</p>
+                </div>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+      </sc-if>
+    </div>
+  </section>
+
+  <!-- COLOR DETECTOR -->
+  <section style="padding:6px 18px 26px;">
+    <div style="background:linear-gradient(135deg,#43412a,#34331f);border-radius:18px;padding:18px;color:#f6f0e3;">
+      <h3 style="font-family:var(--hf,'Reem Kufi'),serif;font-size:18px;margin:0 0 4px;">{{ t.colorTitle }}</h3>
+      <p style="margin:0 0 14px;font-size:12.5px;color:#cabfa3;line-height:1.55;">{{ t.colorSub }}</p>
+      <div style="display:flex;gap:12px;align-items:center;">
+        <label style="flex-shrink:0;width:96px;height:96px;border-radius:13px;border:2px dashed rgba(201,162,75,.5);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;cursor:pointer;background-color:{{ colorImgBg }};">
+          <sc-if value="{{ colorNoImg }}" hint-placeholder-val="{{ true }}">
+            <span style="font-size:11px;color:var(--acl,#c9a24b);text-align:center;font-weight:700;line-height:1.3;">{{ t.colorPick }}</span>
+          </sc-if>
+          <input type="file" accept="image/*" onChange="{{ onColorUpload }}" style="display:none;">
+        </label>
+        <div style="flex:1;">
+          <sc-if value="{{ colorHasResult }}" hint-placeholder-val="{{ true }}">
+            <div>
+              <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px;">
+                <div style="width:30px;height:30px;border-radius:8px;background:{{ colorDom }};border:1px solid rgba(255,255,255,.3);"></div>
+                <div><div style="font-size:10px;color:#cabfa3;">{{ t.colorDom }}</div><div style="font-size:13px;font-weight:700;">{{ colorDom }}</div></div>
+              </div>
+              <div style="display:flex;align-items:center;gap:8px;background:rgba(255,255,255,.08);padding:8px;border-radius:11px;">
+                <div style="width:34px;height:34px;border-radius:8px;background-color:{{ colorMatchColor }};"></div>
+                <div><div style="font-size:10px;color:var(--acl,#c9a24b);font-weight:700;">{{ t.colorBest }}</div><div style="font-size:13px;font-weight:700;">{{ colorMatchName }}</div></div>
+              </div>
+            </div>
+          </sc-if>
+          <sc-if value="{{ colorNoResult }}" hint-placeholder-val="{{ true }}">
+            <p style="margin:0;font-size:12px;color:#cabfa3;line-height:1.5;">{{ t.colorEmpty }}</p>
+          </sc-if>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CATALOG -->
+  <section id="catalog" style="padding:26px 18px;background:#e7ddc9;">
+    <h2 style="font-family:var(--hf,'Reem Kufi'),serif;font-size:23px;margin:0 0 4px;color:#2b281f;">{{ t.catTitle }}</h2>
+    <p style="margin:0 0 14px;font-size:13px;color:#6b6450;">{{ t.catSub }}</p>
+    <div style="display:flex;gap:7px;overflow-x:auto;padding-bottom:8px;margin-bottom:14px;">
+      <sc-for list="{{ categories }}" as="c" hint-placeholder-count="5">
+        <button onClick="{{ c.select }}" style="{{ c.style }}">{{ c.label }}</button>
+      </sc-for>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+      <sc-for list="{{ catalogProducts }}" as="p" hint-placeholder-count="6">
+        <div style="background:#fff;border-radius:15px;overflow:hidden;border:1px solid rgba(52,51,31,.08);box-shadow:0 8px 20px -14px rgba(43,40,31,.4);animation:diyFade .4s ease both;">
+          <div onClick="{{ p.zoom }}" style="position:relative;height:96px;cursor:pointer;background-color:{{ p.color }};">
+            <div style="position:absolute;top:7px;{{ chipSide }}:7px;background:rgba(43,40,31,.7);color:#f6f0e3;font-size:9px;font-weight:700;padding:3px 7px;border-radius:9px;">{{ p.catLabel }}</div>
+            <div style="position:absolute;bottom:7px;{{ chipSideAlt }}:7px;background:rgba(201,162,75,.95);color:#2b281f;font-size:10px;font-weight:800;padding:3px 7px;border-radius:9px;">⤢</div>
+          </div>
+          <div style="padding:10px;">
+            <div style="font-weight:700;font-size:13px;color:#2b281f;margin-bottom:3px;line-height:1.25;">{{ p.name }}</div>
+            <div style="font-size:13px;color:var(--acd,#8a6326);font-weight:800;margin-bottom:9px;">{{ p.price }} <span style="font-size:10px;font-weight:600;color:#6b6450;">{{ t.perM2 }}</span></div>
+            <div style="display:flex;gap:6px;">
+              <button onClick="{{ p.toCalc }}" style="flex:1;background:#34331f;color:#f6f0e3;border:0;padding:7px;border-radius:8px;font-size:11px;font-weight:700;cursor:pointer;">{{ t.catCalc }}</button>
+              <button onClick="{{ p.toCompare }}" style="background:rgba(176,132,58,.14);color:var(--acd,#8a6326);border:0;padding:7px 9px;border-radius:8px;font-size:11px;font-weight:700;cursor:pointer;">{{ t.catCompare }}</button>
+            </div>
+          </div>
+        </div>
+      </sc-for>
+    </div>
+  </section>
+
+  <!-- CALCULATOR -->
+  <section id="calc" style="padding:26px 18px;">
+    <h2 style="font-family:var(--hf,'Reem Kufi'),serif;font-size:23px;margin:0 0 4px;color:#2b281f;">{{ t.calcTitle }}</h2>
+    <p style="margin:0 0 14px;font-size:13px;color:#6b6450;">{{ t.calcSub }}</p>
+    <div style="background:#fff;border:1px solid rgba(52,51,31,.1);border-radius:18px;padding:18px;box-shadow:0 14px 34px -22px rgba(43,40,31,.4);">
+      <div style="display:flex;gap:11px;align-items:center;margin-bottom:14px;">
+        <div style="width:50px;height:50px;border-radius:11px;flex-shrink:0;background-color:{{ calcColor }};border:1px solid rgba(52,51,31,.12);"></div>
+        <div style="flex:1;">
+          <div style="font-size:10px;color:var(--acd,#8a6326);font-weight:700;margin-bottom:3px;">{{ t.calcProduct }}</div>
+          <select onChange="{{ onCalcProduct }}" value="{{ calcProductId }}" style="width:100%;font-family:'Tajawal',sans-serif;font-size:13px;font-weight:600;border:1px solid rgba(52,51,31,.18);border-radius:9px;padding:8px;background:#faf6ec;color:#2b281f;">
+            <sc-for list="{{ allProducts }}" as="p" hint-placeholder-count="6">
+              <option value="{{ p.id }}">{{ p.name }}</option>
+            </sc-for>
+          </select>
+        </div>
+      </div>
+      <div style="margin-bottom:14px;">
+        <div style="font-size:10px;color:var(--acd,#8a6326);font-weight:700;margin-bottom:5px;">{{ t.calcArea }}</div>
+        <input type="number" inputmode="decimal" placeholder="0" value="{{ calcArea }}" onInput="{{ onCalcArea }}" style="width:100%;font-family:'Tajawal',sans-serif;font-size:16px;font-weight:700;border:1px solid rgba(52,51,31,.18);border-radius:9px;padding:11px;background:#faf6ec;color:#2b281f;">
+      </div>
+      <div style="border-top:1px dashed rgba(52,51,31,.18);padding-top:12px;display:flex;flex-direction:column;gap:7px;">
+        <div style="display:flex;justify-content:space-between;font-size:13px;color:#6b6450;"><span>{{ t.calcMaterial }}</span><span style="font-weight:700;color:#2b281f;">{{ calcMat }}</span></div>
+        <div style="display:flex;justify-content:space-between;font-size:13px;color:#6b6450;"><span>{{ t.calcInstall }}</span><span style="font-weight:700;color:#2b281f;">{{ calcInstall }}</span></div>
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-top:5px;padding-top:9px;border-top:1px solid rgba(52,51,31,.12);">
+          <span style="font-size:14px;font-weight:700;color:#2b281f;">{{ t.calcTotal }}</span>
+          <span style="font-family:var(--hf,'Reem Kufi'),serif;font-size:22px;font-weight:700;color:var(--acd,#8a6326);">{{ calcTotal }}</span>
+        </div>
+      </div>
+      <button onClick="{{ downloadQuote }}" style="width:100%;margin-top:14px;background:linear-gradient(135deg,var(--ac,#b0843a),var(--acd,#8a6326));color:#fff;border:0;padding:13px;border-radius:12px;font-family:'Tajawal',sans-serif;font-weight:700;font-size:14px;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;box-shadow:0 10px 22px -10px rgba(138,99,38,.55);">⬇ {{ t.calcQuote }}</button>
+    </div>
+  </section>
+
+  <!-- COMPARE -->
+  <section id="compare" style="padding:26px 18px;background:#2b281f;color:#f6f0e3;">
+    <h2 style="font-family:var(--hf,'Reem Kufi'),serif;font-size:23px;margin:0 0 14px;color:#f6f0e3;">{{ t.compareTitle }}</h2>
+    <div style="font-size:12px;font-weight:700;color:var(--acl,#c9a24b);margin-bottom:10px;">{{ t.compareCat }}</div>
+    <div style="background:rgba(255,255,255,.05);border-radius:14px;padding:14px;margin-bottom:20px;">
+      <sc-for list="{{ catCompareRows }}" as="row" hint-placeholder-count="4">
+        <div style="display:flex;align-items:center;gap:10px;padding:7px 0;border-bottom:1px solid rgba(255,255,255,.08);">
+          <div style="width:64px;font-size:12px;color:#cabfa3;flex-shrink:0;">{{ row.cat }}</div>
+          <div style="flex:1;display:flex;gap:14px;">
+            <sc-for list="{{ row.props }}" as="pr" hint-placeholder-count="4">
+              <div style="flex:1;text-align:center;">
+                <div style="display:flex;gap:2px;justify-content:center;margin-bottom:3px;">
+                  <sc-for list="{{ pr.dots }}" as="d" hint-placeholder-count="5">
+                    <span style="{{ d.style }}"></span>
+                  </sc-for>
+                </div>
+                <div style="font-size:8.5px;color:#9d9176;">{{ pr.label }}</div>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+      </sc-for>
+    </div>
+
+    <div style="font-size:12px;font-weight:700;color:var(--acl,#c9a24b);margin-bottom:10px;">{{ t.compareCustom }}</div>
+    <div style="display:flex;gap:9px;margin-bottom:12px;">
+      <select onChange="{{ onCompareA }}" value="{{ compareAId }}" style="flex:1;font-family:'Tajawal',sans-serif;font-size:12px;font-weight:600;border:1px solid rgba(201,162,75,.4);border-radius:10px;padding:9px;background:#15140f;color:#f6f0e3;">
+        <sc-for list="{{ allProducts }}" as="p" hint-placeholder-count="6"><option value="{{ p.id }}">{{ p.name }}</option></sc-for>
+      </select>
+      <div style="align-self:center;font-size:12px;font-weight:800;color:var(--acl,#c9a24b);">{{ t.compareVs }}</div>
+      <select onChange="{{ onCompareB }}" value="{{ compareBId }}" style="flex:1;font-family:'Tajawal',sans-serif;font-size:12px;font-weight:600;border:1px solid rgba(201,162,75,.4);border-radius:10px;padding:9px;background:#15140f;color:#f6f0e3;">
+        <sc-for list="{{ allProducts }}" as="p" hint-placeholder-count="6"><option value="{{ p.id }}">{{ p.name }}</option></sc-for>
+      </select>
+    </div>
+    <div style="display:flex;gap:11px;margin-bottom:12px;">
+      <div style="flex:1;text-align:center;">
+        <div style="height:70px;border-radius:12px;background-color:{{ compareAColor }};border:1px solid rgba(201,162,75,.3);margin-bottom:6px;"></div>
+        <div style="font-size:12px;font-weight:700;">{{ compareAName }}</div>
+        <div style="font-size:11px;color:var(--acl,#c9a24b);font-weight:700;">{{ compareAPrice }} {{ t.perM2 }}</div>
+      </div>
+      <div style="flex:1;text-align:center;">
+        <div style="height:70px;border-radius:12px;background-color:{{ compareBColor }};border:1px solid rgba(201,162,75,.3);margin-bottom:6px;"></div>
+        <div style="font-size:12px;font-weight:700;">{{ compareBName }}</div>
+        <div style="font-size:11px;color:var(--acl,#c9a24b);font-weight:700;">{{ compareBPrice }} {{ t.perM2 }}</div>
+      </div>
+    </div>
+    <div style="background:rgba(201,162,75,.14);border-left:3px solid var(--acl,#c9a24b);border-radius:0 10px 10px 0;padding:12px 14px;">
+      <div style="font-size:10px;font-weight:800;color:var(--acl,#c9a24b);margin-bottom:4px;">✦ {{ t.compareVerdict }}</div>
+      <p style="margin:0;font-size:13px;line-height:1.6;color:#f6f0e3;">{{ compareSentence }}</p>
+    </div>
+  </section>
+
+  <!-- WHY -->
+  <section style="padding:26px 18px;">
+    <h2 style="font-family:var(--hf,'Reem Kufi'),serif;font-size:23px;margin:0 0 14px;color:#2b281f;">{{ t.whyTitle }}</h2>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:11px;">
+      <sc-for list="{{ whyItems }}" as="w" hint-placeholder-count="4">
+        <div style="background:#fff;border:1px solid rgba(52,51,31,.08);border-radius:14px;padding:14px;">
+          <div style="width:34px;height:34px;border-radius:10px;background:rgba(176,132,58,.14);display:flex;align-items:center;justify-content:center;margin-bottom:9px;font-size:16px;">{{ w.icon }}</div>
+          <div style="font-weight:700;font-size:14px;color:#2b281f;margin-bottom:4px;">{{ w.title }}</div>
+          <p style="margin:0;font-size:12px;color:#6b6450;line-height:1.5;">{{ w.desc }}</p>
+        </div>
+      </sc-for>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS -->
+  <section style="padding:6px 18px 26px;">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin:0 0 14px;">
+      <h2 style="font-family:var(--hf,'Reem Kufi'),serif;font-size:23px;margin:0;color:#2b281f;">{{ t.testiTitle }}</h2>
+      <div style="display:flex;gap:7px;">
+        <button onClick="{{ testiScrollStart }}" aria-label="prev" style="width:32px;height:32px;border-radius:50%;border:1px solid rgba(52,51,31,.18);background:#fff;color:var(--acd,#8a6326);font-size:15px;cursor:pointer;display:flex;align-items:center;justify-content:center;">‹</button>
+        <button onClick="{{ testiScrollEnd }}" aria-label="next" style="width:32px;height:32px;border-radius:50%;border:1px solid rgba(52,51,31,.18);background:#fff;color:var(--acd,#8a6326);font-size:15px;cursor:pointer;display:flex;align-items:center;justify-content:center;">›</button>
+      </div>
+    </div>
+    <div ref="{{ testiRef }}" style="display:flex;gap:12px;overflow-x:auto;padding-bottom:8px;scroll-behavior:smooth;">
+      <sc-for list="{{ testimonials }}" as="ts" hint-placeholder-count="3">
+        <div style="flex:0 0 86%;background:linear-gradient(135deg,#faf6ec,#f1e8d4);border:1px solid rgba(52,51,31,.08);border-radius:16px;padding:16px;">
+          <div style="color:var(--acl,#c9a24b);font-size:14px;margin-bottom:8px;letter-spacing:2px;">★★★★★</div>
+          <p style="margin:0 0 12px;font-size:13.5px;line-height:1.65;color:#2b281f;">{{ ts.quote }}</p>
+          <div style="display:flex;align-items:center;gap:9px;">
+            <div style="width:34px;height:34px;border-radius:50%;background:linear-gradient(135deg,var(--ac,#b0843a),var(--acd,#8a6326));color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:14px;">{{ ts.initial }}</div>
+            <div><div style="font-size:12.5px;font-weight:700;color:#2b281f;">{{ ts.name }}</div><div style="font-size:11px;color:#6b6450;">{{ ts.city }}</div></div>
+          </div>
+        </div>
+      </sc-for>
+    </div>
+  </section>
+
+  <!-- OFFER -->
+  <section style="padding:6px 18px 26px;">
+    <div style="position:relative;background:linear-gradient(135deg,var(--ac,#b0843a),var(--acd,#8a6326));border-radius:20px;padding:22px;color:#fff;overflow:hidden;text-align:center;">
+      <div style="position:absolute;inset:0;opacity:.16;background-image:repeating-linear-gradient(45deg,#fff 0 1px,transparent 1px 18px),repeating-linear-gradient(-45deg,#fff 0 1px,transparent 1px 18px);"></div>
+      <div style="position:relative;">
+        <div style="display:inline-block;background:rgba(255,255,255,.2);padding:4px 12px;border-radius:20px;font-size:11px;font-weight:800;margin-bottom:12px;">{{ t.offerTitle }}</div>
+        <h3 style="font-family:var(--hf,'Reem Kufi'),serif;font-size:21px;margin:0 0 10px;">{{ t.offerText }}</h3>
+        <div style="display:flex;align-items:baseline;gap:10px;justify-content:center;margin-bottom:16px;">
+          <span style="font-size:16px;text-decoration:line-through;opacity:.7;">{{ t.offerWas }}</span>
+          <span style="font-family:var(--hf,'Reem Kufi'),serif;font-size:32px;font-weight:700;">{{ t.offerNow }}</span>
+        </div>
+        <button onClick="{{ openWhats }}" style="background:#fff;color:var(--acd,#8a6326);border:0;padding:12px 30px;border-radius:24px;font-family:'Tajawal',sans-serif;font-weight:800;font-size:14px;cursor:pointer;box-shadow:0 8px 18px rgba(0,0,0,.18);">{{ t.offerCta }}</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section style="padding:6px 18px 30px;">
+    <div style="background:#34331f;border-radius:18px;padding:20px;color:#f6f0e3;">
+      <h3 style="font-family:var(--hf,'Reem Kufi'),serif;font-size:19px;margin:0 0 14px;">{{ t.contactTitle }}</h3>
+      <div style="display:flex;flex-direction:column;gap:13px;">
+        <div style="display:flex;gap:11px;align-items:flex-start;">
+          <div style="width:30px;height:30px;border-radius:9px;background:rgba(201,162,75,.18);display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0;">📍</div>
+          <div><div style="font-size:10px;color:#9d9176;">{{ t.addressLabel }}</div><div style="font-size:13.5px;font-weight:600;">{{ t.address }}</div></div>
+        </div>
+        <div style="display:flex;gap:11px;align-items:flex-start;">
+          <div style="width:30px;height:30px;border-radius:9px;background:rgba(201,162,75,.18);display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0;">🕘</div>
+          <div><div style="font-size:10px;color:#9d9176;">{{ t.hoursLabel }}</div><div style="font-size:13.5px;font-weight:600;">{{ t.hours }}</div></div>
+        </div>
+        <div style="display:flex;gap:11px;align-items:flex-start;">
+          <div style="width:30px;height:30px;border-radius:9px;background:rgba(201,162,75,.18);display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0;">⭐</div>
+          <div><div style="font-size:10px;color:#9d9176;">{{ t.ratingLabel }}</div><div style="font-size:13.5px;font-weight:600;">4.9 · 312 {{ t.reviews }}</div></div>
+        </div>
+      </div>
+      <button onClick="{{ openWhats }}" style="width:100%;margin-top:16px;background:#25785a;color:#fff;border:0;padding:13px;border-radius:12px;font-family:'Tajawal',sans-serif;font-weight:700;font-size:14px;cursor:pointer;">{{ t.whatsapp }}</button>
+    </div>
+    <div style="text-align:center;margin-top:18px;font-size:11px;color:#9d9176;">{{ t.brand }} · {{ t.footerNote }}</div>
+  </section>
+
+  <!-- CHATBOT -->
+  <button onClick="{{ toggleChat }}" style="position:fixed;bottom:20px;{{ fabSide }}:calc(50% - 220px);z-index:60;width:56px;height:56px;border-radius:18px;border:0;background:linear-gradient(135deg,var(--ac,#b0843a),var(--acd,#8a6326));color:#fff;font-size:24px;cursor:pointer;box-shadow:0 10px 26px -6px rgba(138,99,38,.6);animation:diyFloat 3.4s ease-in-out infinite;display:flex;align-items:center;justify-content:center;">
+    <sc-if value="{{ chatClosed }}" hint-placeholder-val="{{ true }}"><span>💬</span></sc-if>
+    <sc-if value="{{ chatOpen }}" hint-placeholder-val="{{ true }}"><span>✕</span></sc-if>
+  </button>
+
+  <sc-if value="{{ chatOpen }}" hint-placeholder-val="{{ false }}">
+    <div style="position:fixed;bottom:84px;left:50%;transform:translateX(-50%);width:min(440px,92vw);max-height:64vh;z-index:60;display:flex;flex-direction:column;background:#efe7d6;border-radius:18px;overflow:hidden;box-shadow:0 24px 60px -18px rgba(0,0,0,.5);border:1px solid rgba(52,51,31,.14);">
+      <div style="display:flex;align-items:center;gap:10px;padding:13px 16px;background:linear-gradient(135deg,#43412a,#34331f);color:#f6f0e3;">
+        <div style="width:34px;height:34px;border-radius:10px;background:rgba(201,162,75,.25);display:flex;align-items:center;justify-content:center;font-size:16px;">🤖</div>
+        <div style="flex:1;"><div style="font-weight:700;font-size:14px;">{{ t.chatTitle }}</div><div style="font-size:10px;color:#9fe6c4;display:flex;align-items:center;gap:5px;"><span style="width:6px;height:6px;border-radius:50%;background:#7fe3b8;"></span>{{ t.chatOnline }}</div></div>
+        <button onClick="{{ toggleChat }}" aria-label="close" style="width:30px;height:30px;border-radius:9px;border:0;background:rgba(255,255,255,.1);color:#f6f0e3;font-size:15px;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;">✕</button>
+      </div>
+      <div ref="{{ chatScrollRef }}" style="flex:1;overflow-y:auto;padding:14px;display:flex;flex-direction:column;gap:10px;">
+        <sc-for list="{{ chatMsgs }}" as="m" hint-placeholder-count="1">
+          <div style="{{ m.wrap }}">
+            <div style="{{ m.bubble }}">{{ m.text }}</div>
+            <sc-if value="{{ m.showWA }}" hint-placeholder-val="{{ false }}">
+              <button onClick="{{ openWhats }}" style="margin-top:7px;background:#25785a;color:#fff;border:0;padding:8px 14px;border-radius:20px;font-size:12px;font-weight:700;cursor:pointer;display:inline-flex;align-items:center;gap:6px;">↗ {{ t.chatToWA }}</button>
+            </sc-if>
+          </div>
+        </sc-for>
+      </div>
+      <div style="padding:10px;display:flex;gap:7px;flex-wrap:wrap;border-top:1px solid rgba(52,51,31,.1);background:#f6f0e3;">
+        <sc-for list="{{ chatChips }}" as="ch" hint-placeholder-count="3">
+          <button onClick="{{ ch.send }}" style="font-size:11px;background:rgba(176,132,58,.14);color:var(--acd,#8a6326);border:0;padding:6px 11px;border-radius:16px;font-weight:700;cursor:pointer;">{{ ch.label }}</button>
+        </sc-for>
+      </div>
+      <div style="display:flex;gap:8px;padding:11px;background:#f6f0e3;border-top:1px solid rgba(52,51,31,.1);">
+        <input value="{{ chatInput }}" onInput="{{ onChatInput }}" onKeyDown="{{ onChatKey }}" placeholder="{{ t.chatPlaceholder }}" style="flex:1;font-family:'Tajawal',sans-serif;font-size:13px;border:1px solid rgba(52,51,31,.18);border-radius:22px;padding:10px 15px;background:#fff;color:#2b281f;outline:none;">
+        <button onClick="{{ sendChat }}" style="width:42px;height:42px;border-radius:50%;border:0;background:linear-gradient(135deg,var(--ac,#b0843a),var(--acd,#8a6326));color:#fff;font-size:16px;cursor:pointer;flex-shrink:0;">➤</button>
+      </div>
+    </div>
+  </sc-if>
+
+  <!-- ZOOM MODAL -->
+  <sc-if value="{{ zoomActive }}" hint-placeholder-val="{{ false }}">
+    <div onClick="{{ closeZoom }}" style="position:fixed;inset:0;z-index:70;background:rgba(21,20,15,.82);backdrop-filter:blur(6px);display:flex;align-items:center;justify-content:center;padding:24px;">
+      <div style="width:min(380px,90vw);background:#15140f;border-radius:20px;overflow:hidden;border:1px solid rgba(201,162,75,.35);box-shadow:0 30px 70px rgba(0,0,0,.6);">
+        <div style="position:relative;height:260px;overflow:hidden;background-color:{{ zoomColor }};">
+          <div style="position:absolute;top:0;bottom:0;width:60%;background:linear-gradient(105deg,transparent,rgba(255,247,228,.4),transparent);animation:diyShimmer 2.8s ease-in-out infinite;"></div>
+          <div style="position:absolute;top:10px;{{ chipSide }}:10px;background:rgba(201,162,75,.95);color:#2b281f;font-size:10px;font-weight:800;padding:4px 9px;border-radius:10px;">{{ t.zoomBadge }}</div>
+        </div>
+        <div style="padding:16px;color:#f6f0e3;">
+          <div style="font-family:var(--hf,'Reem Kufi'),serif;font-size:18px;margin-bottom:4px;">{{ zoomName }}</div>
+          <p style="margin:0 0 14px;font-size:12.5px;color:#cabfa3;line-height:1.55;">{{ zoomDesc }}</p>
+          <div style="display:flex;gap:8px;">
+            <button onClick="{{ zoomToCalc }}" style="flex:1;background:var(--acl,#c9a24b);color:#2b281f;border:0;padding:10px;border-radius:10px;font-weight:700;font-size:13px;cursor:pointer;">{{ t.catCalc }}</button>
+            <button onClick="{{ closeZoom }}" style="background:rgba(255,255,255,.1);color:#f6f0e3;border:1px solid rgba(201,162,75,.4);padding:10px 16px;border-radius:10px;font-weight:700;font-size:13px;cursor:pointer;">{{ t.zoomClose }}</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </sc-if>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{
+  &quot;$preview&quot;: {&quot;width&quot;: 480, &quot;height&quot;: 900},
+  &quot;accent&quot;: {&quot;editor&quot;: &quot;enum&quot;, &quot;options&quot;: [&quot;نحاسي&quot;, &quot;زيتوني&quot;, &quot;طيني&quot;], &quot;default&quot;: &quot;نحاسي&quot;, &quot;tsType&quot;: &quot;string&quot;},
+  &quot;vibe&quot;: {&quot;editor&quot;: &quot;enum&quot;, &quot;options&quot;: [&quot;تراثي دافئ&quot;, &quot;عصري مينمال&quot;], &quot;default&quot;: &quot;تراثي دافئ&quot;, &quot;tsType&quot;: &quot;string&quot;},
+  &quot;showcase&quot;: {&quot;editor&quot;: &quot;boolean&quot;, &quot;default&quot;: true, &quot;tsType&quot;: &quot;boolean&quot;}
+}">
+class Component extends DCLogic {
+  constructor(props){
+    super(props);
+    this.arStageRef = React.createRef();
+    this.arVideoRef = React.createRef();
+    this.arUploadRef = React.createRef();
+    this.chatScrollRef = React.createRef();
+    this.arFloorsRef = React.createRef();
+    this.testiRef = React.createRef();
+    this.state = {
+      lang:'ar', activeRoom:'majlis', heroFloor:'walnut', autoCycle:true,
+      arTab:'upload', arImage:null, arLinePct:52, arFloor:'walnut', arCamState:'idle',
+      catFilter:'all',
+      calcProductId:'walnut', calcArea:'40',
+      advisorStep:0, advisorAns:{}, advisorDone:false,
+      colorImg:null, colorDom:null, colorMatch:null,
+      compareAId:'walnut', compareBId:'porcelain1',
+      chatOpen:false, chatInput:'', chatMsgs:[{role:'bot', key:'welcome'}],
+      zoom:null,
+      tex:{}
+    };
+  }
+
+  componentDidMount(){
+    // textures: solid colors for Wix, async generation for other hosts
+    const tex = {};
+    this.PRODUCTS.forEach(p=>{ 
+      tex[p.id] = 'data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22320%22 height=%22320%22%3E%3Crect fill=%22'+p.color.slice(1)+'%22 width=%22320%22 height=%22320%22/%3E%3C/svg%3E';
+      if(!window.isWix) this.genTextureAsync(p.tx, p.color, p.tx2, (dataUrl)=>{ this.setState(s=>({tex:{...s.tex,[p.id]:dataUrl}})); });
+    });
+    this.setState({tex});
+    // auto cycle hero floors (wow)
+    this._cycle = setInterval(()=>{
+      if(this.props.showcase===false) return;
+      if(!this.state.autoCycle){ clearInterval(this._cycle); return; }
+      const ids = this.HERO_FLOORS;
+      const i = ids.indexOf(this.state.heroFloor);
+      this.setState({heroFloor: ids[(i+1)%ids.length]});
+    }, 1600);
+  }
+  componentWillUnmount(){ clearInterval(this._cycle); if(this._stream){ this._stream.getTracks().forEach(t=>t.stop()); } }
+  componentDidUpdate(_,prev){
+    if(prev && prev.arImage!==this.state.arImage && this.state.arImage && this.arUploadRef.current){
+      this.arUploadRef.current.style.backgroundImage='url('+this.state.arImage+')';
+    }
+    if(prev && prev.chatMsgs!==this.state.chatMsgs && this.chatScrollRef.current){
+      const el=this.chatScrollRef.current; setTimeout(()=>{el.scrollTop=el.scrollHeight;},30);
+    }
+  }
+
+  /* ---------- DATA ---------- */
+  get PRODUCTS(){ return [
+    {id:'walnut', cat:'parquet', ar:'باركيه جوز ملكي', en:'Royal Walnut', price:145, install:35, color:'#5a3b22', tx:'wood', tx2:'#3d2716', fam:'warm', char:'lux', warmth:5,luxury:5,water:2,durab:3},
+    {id:'oak', cat:'parquet', ar:'باركيه بلوط طبيعي', en:'Natural Oak', price:120, install:35, color:'#b08a55', tx:'wood', tx2:'#8a6535', fam:'warm', char:'heritage', warmth:4,luxury:4,water:2,durab:3},
+    {id:'greywood', cat:'parquet', ar:'باركيه رمادي حديث', en:'Modern Grey Wood', price:130, install:35, color:'#8e8b86', tx:'wood', tx2:'#5f5e58', fam:'grey', char:'modern', warmth:3,luxury:4,water:2,durab:3},
+    {id:'carrara', cat:'ceramic', ar:'سيراميك رخامي أبيض', en:'Carrara White', price:85, install:25, color:'#e9e6df', tx:'marble', tx2:'#b9b6ad', fam:'light', char:'lux', warmth:2,luxury:5,water:5,durab:4},
+    {id:'beige', cat:'ceramic', ar:'سيراميك بيج كلاسيك', en:'Classic Beige', price:70, install:25, color:'#d8c8ac', tx:'ceramic', tx2:'#bda886', fam:'light', char:'heritage', warmth:3,luxury:3,water:5,durab:4},
+    {id:'concrete', cat:'ceramic', ar:'سيراميك أسمنتي', en:'Concrete Look', price:75, install:25, color:'#a3a097', tx:'ceramic', tx2:'#85827a', fam:'grey', char:'modern', warmth:2,luxury:3,water:5,durab:4},
+    {id:'porcelain1', cat:'porcelain', ar:'بورسلين كالاكاتا', en:'Calacatta Porcelain', price:160, install:30, color:'#eceae3', tx:'marble', tx2:'#9a9488', fam:'light', char:'lux', warmth:2,luxury:5,water:5,durab:5},
+    {id:'porcelain2', cat:'porcelain', ar:'بورسلين حجري داكن', en:'Dark Stone Porcelain', price:140, install:30, color:'#4f4d47', tx:'stone', tx2:'#2f2e2a', fam:'dark', char:'modern', warmth:2,luxury:4,water:5,durab:5},
+    {id:'porcelain3', cat:'porcelain', ar:'بورسلين رملي', en:'Sand Stone Porcelain', price:130, install:30, color:'#c4 a987'.replace(' ',''), tx:'stone', tx2:'#a08a64', fam:'warm', char:'heritage', warmth:3,luxury:4,water:5,durab:5},
+    {id:'spc1', cat:'spc', ar:'SPC بلوط دافئ', en:'Warm Oak SPC', price:95, install:20, color:'#bd9863', tx:'spc', tx2:'#977440', fam:'warm', char:'practical', warmth:4,luxury:3,water:5,durab:5},
+    {id:'spc2', cat:'spc', ar:'SPC رمادي مطفي', en:'Matte Grey SPC', price:90, install:20, color:'#9a978f', tx:'spc', tx2:'#6f6d66', fam:'grey', char:'practical', warmth:3,luxury:3,water:5,durab:5},
+    {id:'spc3', cat:'spc', ar:'SPC طيني تراثي', en:'Heritage Clay SPC', price:100, install:20, color:'#b06a44', tx:'clay', tx2:'#8a4d2d', fam:'warm', char:'heritage', warmth:4,luxury:4,water:4,durab:4},
+  ]; }
+  get HERO_FLOORS(){ return ['walnut','carrara','porcelain2','spc3','oak']; }
+  prod(id){ return this.PRODUCTS.find(p=>p.id===id); }
+
+  get ROOMS(){ return {
+    majlis:{ar:'مجلس',en:'Majlis', wall:'#d8cdb8', frame:'#b9a982', decor:'#8a6f4a', winSide:'right', decorSide:'left'},
+    bedroom:{ar:'غرفة نوم',en:'Bedroom', wall:'#cdd2cf', frame:'#a7afa9', decor:'#7d8a82', winSide:'left', decorSide:'right'},
+    kitchen:{ar:'مطبخ',en:'Kitchen', wall:'#e2dcd0', frame:'#c2b7a0', decor:'#9a9486', winSide:'right', decorSide:'left'},
+    bathroom:{ar:'حمام',en:'Bathroom', wall:'#cfd9dc', frame:'#a6b3b6', decor:'#8294 97'.replace(' ',''), winSide:'left', decorSide:'right'},
+    courtyard:{ar:'الفناء الخارجي',en:'Outdoor', wall:'#d3d8c6', frame:'#aeb59c', decor:'#6f8a52', winSide:'right', decorSide:'left'},
+  }; }
+
+  /* ---------- TEXTURE GEN ---------- */
+  genTextureAsync(type, base, dark, cb){
+    // async wrapper so Wix can load with solid colors, real textures render after
+    setTimeout(()=>{ cb(this.genTexture(type, base, dark)); }, 100);
+  }
+  shade(hex,amt){
+    let c=hex.replace('#',''); if(c.length===3)c=c.split('').map(x=>x+x).join('');
+    let r=parseInt(c.slice(0,2),16),g=parseInt(c.slice(2,4),16),b=parseInt(c.slice(4,6),16);
+    r=Math.max(0,Math.min(255,r+amt));g=Math.max(0,Math.min(255,g+amt));b=Math.max(0,Math.min(255,b+amt));
+    return '#'+[r,g,b].map(v=>v.toString(16).padStart(2,'0')).join('');
+  }
+  genTexture(type, base, dark){
+    const S=320, c=document.createElement('canvas'); c.width=S;c.height=S;
+    const x=c.getContext('2d'); const rnd=(a,b)=>a+Math.random()*(b-a);
+    x.fillStyle=base; x.fillRect(0,0,S,S);
+    if(type==='wood'||type==='spc'){
+      const ph = type==='spc'?80:64;
+      for(let y=0;y<S;y+=ph){
+        const off = Math.floor(rnd(-12,12));
+        x.fillStyle=this.shade(base,off); x.fillRect(0,y,S,ph);
+        // grain
+        for(let i=0;i<26;i++){
+          x.strokeStyle='rgba(0,0,0,'+rnd(.03,.09)+')'; x.lineWidth=rnd(.5,1.4); x.beginPath();
+          const gy=y+rnd(2,ph-2); x.moveTo(0,gy);
+          for(let gx=0;gx<=S;gx+=20){ x.lineTo(gx, gy+Math.sin(gx/30+i)*rnd(.5,2)); }
+          x.stroke();
+        }
+        // seam
+        x.strokeStyle='rgba(0,0,0,.18)'; x.lineWidth=type==='spc'?2:1.4; x.beginPath(); x.moveTo(0,y); x.lineTo(S,y); x.stroke();
+        x.strokeStyle='rgba(255,255,255,.06)'; x.beginPath(); x.moveTo(0,y+1.5); x.lineTo(S,y+1.5); x.stroke();
+      }
+    } else if(type==='marble'){
+      x.fillStyle=base; x.fillRect(0,0,S,S);
+      // soft mottle
+      for(let i=0;i<60;i++){ x.fillStyle='rgba(0,0,0,'+rnd(.01,.03)+')'; x.beginPath(); x.arc(rnd(0,S),rnd(0,S),rnd(20,70),0,7); x.fill(); }
+      // veins
+      for(let v=0;v<5;v++){
+        x.strokeStyle='rgba('+(dark?'80,78,70':'150,146,138')+','+rnd(.25,.5)+')'; x.lineWidth=rnd(1,3); x.beginPath();
+        let px=rnd(0,S),py=0; x.moveTo(px,py);
+        while(py<S){ px+=rnd(-40,40); py+=rnd(20,50); x.lineTo(px,py); }
+        x.stroke();
+        // hairline branches
+        x.lineWidth=.6; x.strokeStyle='rgba(120,116,108,.3)';
+      }
+    } else if(type==='stone'){
+      for(let i=0;i<2600;i++){ x.fillStyle='rgba('+(Math.random()<.5?'255,255,255':'0,0,0')+','+rnd(.02,.08)+')'; x.fillRect(rnd(0,S),rnd(0,S),rnd(1,3),rnd(1,3)); }
+      for(let i=0;i<30;i++){ x.fillStyle='rgba(0,0,0,'+rnd(.02,.05)+')'; x.beginPath(); x.arc(rnd(0,S),rnd(0,S),rnd(8,26),0,7); x.fill(); }
+    } else if(type==='clay'){
+      for(let i=0;i<2200;i++){ x.fillStyle='rgba('+(Math.random()<.5?'255,230,200':'90,40,20')+','+rnd(.03,.1)+')'; x.fillRect(rnd(0,S),rnd(0,S),rnd(1,3),rnd(1,3)); }
+      // tile grout
+      x.strokeStyle='rgba(0,0,0,.18)'; x.lineWidth=4;
+      [S/2].forEach(()=>{}); x.strokeRect(0,0,S,S); x.beginPath(); x.moveTo(S/2,0);x.lineTo(S/2,S);x.moveTo(0,S/2);x.lineTo(S,S/2); x.stroke();
+    } else { // ceramic
+      for(let i=0;i<40;i++){ x.fillStyle='rgba(0,0,0,'+rnd(.01,.03)+')'; x.beginPath(); x.arc(rnd(0,S),rnd(0,S),rnd(30,90),0,7); x.fill(); }
+      x.strokeStyle='rgba(0,0,0,.14)'; x.lineWidth=3; x.strokeRect(0,0,S,S); x.beginPath(); x.moveTo(S/2,0);x.lineTo(S/2,S);x.moveTo(0,S/2);x.lineTo(S,S/2); x.stroke();
+      x.strokeStyle='rgba(255,255,255,.1)'; x.lineWidth=1; x.strokeRect(2,2,S-4,S-4);
+    }
+    // global light vignette
+    const g=x.createRadialGradient(S*.4,S*.35,20,S*.5,S*.5,S*.8);
+    g.addColorStop(0,'rgba(255,250,235,.12)'); g.addColorStop(1,'rgba(0,0,0,.12)');
+    x.fillStyle=g; x.fillRect(0,0,S,S);
+    return c.toDataURL('image/jpeg',0.82);
+  }
+  texFor(id){ return this.state.tex[id]||''; }
+
+  /* ---------- STRINGS ---------- */
+  get STR(){ return {
+    ar:{ brand:'أرضيات الديار', langBtn:'EN', whatsapp:'واتساب',
+      heroEyebrow:'معاينة حيّة بتقنية ذكية', heroTitle:'شوف أرضيتك قبل ما تشتريها',
+      heroSub:'بدّل الأرضية بضغطة، جرّبها بصورة غرفتك، وخلّ التقنية الذكية ترشّح لك الأنسب.',
+      heroSwatchLabel:'بدّل الأرضية', ctaTry:'جرّبها بصورتك', ctaAdvisor:'اسأل المستشار',
+      arEyebrow:'الواقع المعزّز', arTitle:'جرّبها بمساحتك', arSub:'فعّل الكاميرا، أو ارفع صورة غرفتك واسحب الخط لتحديد حافة الأرضية.',
+      arTabCam:'كاميرا حية', arTabDemo:'نموذج AR', arTabUpload:'ارفع صورتك',
+      arUploadHint:'ارفع صورة غرفتك، ثم اسحب الخط الذهبي لتحديد أين تبدأ الأرضية.', arDragLabel:'اسحب لتحديد الحافة',
+      arPick:'اختر صورة', arSave:'احفظ النتيجة', arCamStart:'تشغيل الكاميرا',
+      arCamDenied:'ما قدرنا نفتح الكاميرا — جرّب «نموذج AR» أو «ارفع صورتك».',
+      advisorEyebrow:'المستشار الذكي', advisorTitle:'دع التقنية الذكية تختار لك', advisorSub:'٤ أسئلة سريعة، ونرشّح لك أفضل ٣ أرضيات بنسبة توافق وسبب واضح.',
+      advisorResultTitle:'ترشيحاتك', advisorMatch:'توافق', advisorRestart:'من جديد',
+      colorTitle:'كاشف اللون من صورتك', colorSub:'ارفع صورة لجدار غرفتك، ونحلل اللون السائد ونختار الأقرب.',
+      colorPick:'ارفع صورة الجدار', colorDom:'اللون السائد', colorBest:'الأنسب لك', colorEmpty:'بانتظار صورة الجدار لنحلل ألوانها.',
+      catTitle:'الكتالوج', catSub:'١٢ منتج على ٤ فئات — اضغط الصورة للتكبير.', perM2:'ر.س/م²',
+      catCalc:'احسب', catCompare:'قارن',
+      calcTitle:'حاسبة التكلفة', calcSub:'اختر المنتج وأدخل المساحة، يطلع لك السعر فورًا.',
+      calcProduct:'المنتج', calcArea:'المساحة (م²)', calcMaterial:'الخامة', calcInstall:'التركيب', calcTotal:'الإجمالي', calcQuote:'حمّل عرض السعر',
+      compareTitle:'قارن واختار', compareCat:'مقارنة الفئات', compareCustom:'مقارنة مخصصة', compareVs:'مقابل', compareVerdict:'الخلاصة',
+      whyTitle:'ليش الديار؟',
+      testiTitle:'آراء عملائنا',
+      offerTitle:'عرض محدود', offerText:'معاينة وتصميم أرضيتك بالكامل', offerWas:'٢٥٠ ر.س', offerNow:'مجانًا', offerCta:'احجز الآن',
+      contactTitle:'تواصل معنا', addressLabel:'العنوان', address:'حي الياسمين، الرياض', hoursLabel:'ساعات العمل', hours:'السبت–الخميس ٩ص–١٠م', ratingLabel:'التقييم', reviews:'تقييم', footerNote:'تجربة أرضيات أذكى.',
+      chatTitle:'مساعد الديار', chatOnline:'متصل الآن', chatPlaceholder:'اكتب سؤالك...', chatToWA:'أكمل على واتساب',
+      zoomBadge:'تكبير ×٢', zoomClose:'إغلاق',
+    },
+    en:{ brand:'Al-Diyar Floors', langBtn:'ع', whatsapp:'WhatsApp',
+      heroEyebrow:'Smart live preview', heroTitle:'See your floor before you buy it',
+      heroSub:'Swap floors in a tap, try them in a photo of your room, and let AI pick your best match.',
+      heroSwatchLabel:'Swap the floor', ctaTry:'Try in your photo', ctaAdvisor:'Ask the advisor',
+      arEyebrow:'Augmented reality', arTitle:'Try it in your space', arSub:'Turn on the camera, or upload a photo of your room and drag the line to set the floor edge.',
+      arTabCam:'Live camera', arTabDemo:'AR demo', arTabUpload:'Upload photo',
+      arUploadHint:'Upload a photo of your room, then drag the gold line to where the floor starts.', arDragLabel:'Drag to set edge',
+      arPick:'Choose image', arSave:'Save result', arCamStart:'Start camera',
+      arCamDenied:'Couldn\'t open the camera — try “AR demo” or “Upload photo”.',
+      advisorEyebrow:'Smart advisor', advisorTitle:'Let smart tech choose for you', advisorSub:'4 quick questions, and we recommend your top 3 floors with a match score and clear reason.',
+      advisorResultTitle:'Your matches', advisorMatch:'match', advisorRestart:'Start over',
+      colorTitle:'Color detector', colorSub:'Upload a photo of your wall, we read the dominant color and pick the closest floor.',
+      colorPick:'Upload wall photo', colorDom:'Dominant color', colorBest:'Best match', colorEmpty:'Waiting for a wall photo to analyze its colors.',
+      catTitle:'Catalog', catSub:'12 products across 4 categories — tap to zoom.', perM2:'SAR/m²',
+      catCalc:'Calc', catCompare:'Compare',
+      calcTitle:'Cost calculator', calcSub:'Pick a product, enter the area, get the price instantly.',
+      calcProduct:'Product', calcArea:'Area (m²)', calcMaterial:'Material', calcInstall:'Installation', calcTotal:'Total', calcQuote:'Download quote',
+      compareTitle:'Compare & choose', compareCat:'Category comparison', compareCustom:'Custom compare', compareVs:'vs', compareVerdict:'Verdict',
+      whyTitle:'Why Al-Diyar?',
+      testiTitle:'What clients say',
+      offerTitle:'Limited offer', offerText:'Full floor preview & design', offerWas:'250 SAR', offerNow:'Free', offerCta:'Book now',
+      contactTitle:'Visit us', addressLabel:'Address', address:'Al-Yasmin, Riyadh', hoursLabel:'Hours', hours:'Sat–Thu 9am–10pm', ratingLabel:'Rating', reviews:'reviews', footerNote:'A smarter way to floor.',
+      chatTitle:'Al-Diyar assistant', chatOnline:'Online now', chatPlaceholder:'Type your question...', chatToWA:'Continue on WhatsApp',
+      zoomBadge:'Zoom ×2', zoomClose:'Close',
+    }
+  }; }
+  get t(){ return this.STR[this.state.lang]; }
+  get ar(){ return this.state.lang==='ar'; }
+  pn(p){ return this.ar?p.ar:p.en; }
+
+  /* ---------- ADVISOR ---------- */
+  get ADVISOR_Q(){ return [
+    {key:'space', ar:'وش المساحة اللي تبي تغطيها؟', en:'Which space are you covering?', opts:[
+      {v:'living',ar:'مجلس / صالة',en:'Living / Majlis'},{v:'bedroom',ar:'غرفة نوم',en:'Bedroom'},{v:'kitchen',ar:'مطبخ',en:'Kitchen'},{v:'wet',ar:'حمام / مبلّل',en:'Bathroom / Wet'}]},
+    {key:'color', ar:'لون ديكورك الحالي أقرب لـ؟', en:'Your current decor leans toward?', opts:[
+      {v:'light',ar:'فاتح ومحايد',en:'Light & neutral'},{v:'warm',ar:'دافئ وترابي',en:'Warm & earthy'},{v:'grey',ar:'رمادي وحديث',en:'Grey & modern'},{v:'dark',ar:'غامق وجريء',en:'Dark & bold'}]},
+    {key:'char', ar:'الطابع اللي يعجبك؟', en:'The character you love?', opts:[
+      {v:'heritage',ar:'تراثي دافئ',en:'Warm heritage'},{v:'modern',ar:'عصري بسيط',en:'Clean modern'},{v:'lux',ar:'فخم راقي',en:'Refined luxury'},{v:'practical',ar:'عملي متين',en:'Practical & tough'}]},
+    {key:'budget', ar:'الميزانية للمتر؟', en:'Budget per m²?', opts:[
+      {v:'eco',ar:'اقتصادي',en:'Economy'},{v:'mid',ar:'متوسط',en:'Mid-range'},{v:'high',ar:'مرتفع',en:'Premium'}]},
+  ]; }
+  scoreProduct(p,a){
+    let s=0;
+    if(a.color && p.fam===a.color) s+=30;
+    if(a.char && p.char===a.char) s+=30;
+    if(a.space==='kitchen'||a.space==='wet') s += p.water*4;
+    if(a.space==='living') s += p.luxury*2 + p.warmth*2;
+    if(a.space==='bedroom') s += p.warmth*3;
+    if(a.budget==='eco') s += (170-(p.price+p.install))*0.18;
+    if(a.budget==='high') s += (p.price+p.install)*0.12 + p.luxury*3;
+    if(a.budget==='mid') s += 10 - Math.abs((p.price+p.install)-115)*0.12;
+    return s;
+  }
+  advisorReason(p,a){
+    const bits=[];
+    if(a.char===p.char){ const m={heritage:{ar:'طابع تراثي دافئ',en:'warm heritage character'},modern:{ar:'إحساس عصري بسيط',en:'clean modern feel'},lux:{ar:'فخامة راقية',en:'refined luxury'},practical:{ar:'عملي ومتين',en:'practical & tough'}}; bits.push(this.ar?m[p.char].ar:m[p.char].en); }
+    if((a.space==='kitchen'||a.space==='wet') && p.water>=5) bits.push(this.ar?'مقاومة ماء ممتازة':'excellent water resistance');
+    if(a.color===p.fam) bits.push(this.ar?'يطابق لون ديكورك':'matches your decor tone');
+    if(a.budget==='eco' && (p.price+p.install)<=120) bits.push(this.ar?'ضمن ميزانيتك':'within budget');
+    if(!bits.length) bits.push(this.ar?'توازن ممتاز بين الفخامة والمتانة':'great balance of luxury & durability');
+    return (this.ar?'لأنه ':'Because it offers ')+bits.slice(0,2).join(this.ar?' و':' and ')+'.';
+  }
+  get advisorResultsData(){
+    const a=this.state.advisorAns;
+    return this.PRODUCTS.map(p=>({p, s:this.scoreProduct(p,a)})).sort((x,y)=>y.s-x.s).slice(0,3)
+      .map((it,i)=>({ p:it.p, pct: Math.max(72, Math.min(98, Math.round(92 - i*6 + (it.s%7)))) }));
+  }
+
+  /* ---------- CHAT ---------- */
+  get FAQ(){ return [
+    {k:['سعر','أسعار','كم','بكم','price','cost','how much'], ar:'أسعارنا تبدأ من ٧٠ ر.س/م² للسيراميك، وتوصل ١٦٠ ر.س للبورسلين الفاخر. التركيب من ٢٠–٣٥ ر.س/م². استخدم الحاسبة لسعر دقيق.', en:'Prices start at 70 SAR/m² for ceramic up to 160 for premium porcelain. Installation is 20–35 SAR/m². Use the calculator for an exact quote.'},
+    {k:['تركيب','install','installation','fix'], ar:'فريقنا يركّب احترافيًا خلال ٢–٤ أيام حسب المساحة، مع تجهيز الأرضية وتنظيف بعد التركيب.', en:'Our team installs professionally in 2–4 days depending on area, including floor prep and post-install cleanup.'},
+    {k:['ضمان','warranty','guarantee'], ar:'ضمان حتى ١٥ سنة على المنتج وسنتين على التركيب ضد عيوب الصناعة.', en:'Up to 15-year product warranty and 2-year installation warranty against manufacturing defects.'},
+    {k:['صيانة','تنظيف','maintenance','clean','care'], ar:'كل أرضياتنا سهلة التنظيف بممسحة رطبة. SPC والبورسلين مقاومة ماء وخدش بشكل ممتاز.', en:'All our floors wipe clean with a damp mop. SPC and porcelain resist water and scratches very well.'},
+    {k:['حجز','موعد','زيارة','book','appointment','visit'], ar:'تقدر تحجز معاينة مجانية الحين — أرسل لنا موقعك على واتساب ونرتب الزيارة.', en:'You can book a free site visit now — send us your location on WhatsApp and we\'ll arrange it.'},
+    {k:['ماء','رطوبة','حمام','مطبخ','water','wet','bathroom'], ar:'للمناطق الرطبة ننصح بالبورسلين أو SPC — مقاومة ماء ١٠٠٪ ومناسبة للحمامات والمطابخ.', en:'For wet areas we recommend porcelain or SPC — 100% water resistant, perfect for bathrooms and kitchens.'},
+    {k:['باركيه','خشب','parquet','wood'], ar:'الباركيه يعطي دفء وفخامة طبيعية، مثالي للمجالس وغرف النوم. عندنا جوز، بلوط، ورمادي حديث.', en:'Parquet gives natural warmth and luxury, ideal for majlis and bedrooms. We have walnut, oak, and modern grey.'},
+    {k:['توصيل','شحن','delivery','shipping'], ar:'التوصيل داخل الرياض خلال ٢٤–٤٨ ساعة، ومجاني للطلبات فوق ٣٠ م².', en:'Delivery within Riyadh in 24–48h, free for orders above 30 m².'},
+    {k:['spc','اس بي سي'], ar:'SPC أرضية مقاومة ماء وخدش، دافئة تحت القدم، وأسعارها اقتصادية — من ٩٠ ر.س/م².', en:'SPC is water- and scratch-resistant, warm underfoot, and budget-friendly — from 90 SAR/m².'},
+    {k:['لون','ألوان','color','colour'], ar:'جرّب «كاشف اللون» وارفع صورة جدارك — نختار لك الأرضية الأقرب تلقائيًا.', en:'Try the “Color detector” and upload a wall photo — we auto-pick the closest floor.'},
+    {k:['عرض','خصم','offer','discount'], ar:'عرض حالي: معاينة وتصميم أرضيتك مجانًا (بدل ٢٥٠ ر.س). احجز قبل نهاية الشهر.', en:'Current offer: free floor preview & design (worth 250 SAR). Book before month-end.'},
+    {k:['وين','موقع','عنوان','where','location','address'], ar:'معرضنا في حي الياسمين، الرياض. السبت–الخميس ٩ص–١٠م.', en:'Our showroom is in Al-Yasmin, Riyadh. Sat–Thu 9am–10pm.'},
+  ]; }
+  answerFor(text){
+    const q=text.toLowerCase();
+    const hit=this.FAQ.find(f=>f.k.some(kw=>q.includes(kw.toLowerCase())));
+    if(hit) return {text:this.ar?hit.ar:hit.en, wa:false};
+    return {text: this.ar?'سؤال ممتاز! خل أحوّلك لفريقنا على واتساب يجاوبك بالتفصيل فورًا.':'Great question! Let me connect you to our team on WhatsApp for a detailed answer.', wa:true};
+  }
+  pushUser(text){
+    if(!text.trim()) return;
+    const a=this.answerFor(text);
+    this.setState(s=>({ chatInput:'', chatMsgs:[...s.chatMsgs, {role:'user',text}, {role:'bot',text:a.text,wa:a.wa}] }));
+  }
+
+  /* ---------- AR ---------- */
+  startLineDrag=(e)=>{
+    e.preventDefault();
+    const stage=this.arStageRef.current; if(!stage) return;
+    const move=(ev)=>{
+      const r=stage.getBoundingClientRect();
+      const cy=(ev.touches?ev.touches[0].clientY:ev.clientY);
+      let pct=((cy-r.top)/r.height)*100; pct=Math.max(15,Math.min(85,pct));
+      this.setState({arLinePct:pct});
+    };
+    const up=()=>{ window.removeEventListener('pointermove',move); window.removeEventListener('pointerup',up); };
+    window.addEventListener('pointermove',move); window.addEventListener('pointerup',up);
+  };
+  onArUpload=(e)=>{
+    const f=e.target.files&&e.target.files[0]; if(!f) return;
+    const rd=new FileReader(); rd.onload=ev=>this.setState({arImage:ev.target.result, arTab:'upload'}); rd.readAsDataURL(f);
+  };
+  startCam=async()=>{
+    try{
+      const st=await navigator.mediaDevices.getUserMedia({video:{facingMode:'environment'}});
+      this._stream=st; this.setState({arCamState:'on'},()=>{ if(this.arVideoRef.current) this.arVideoRef.current.srcObject=st; });
+    }catch(err){ this.setState({arCamState:'denied'}); }
+  };
+  saveAR=()=>{
+    const img=this.state.arImage; if(!img){ return; }
+    const im=new Image(); im.onload=()=>{
+      const W=im.width,H=im.height,c=document.createElement('canvas'); c.width=W;c.height=H;
+      const x=c.getContext('2d'); x.drawImage(im,0,0,W,H);
+      const tex=new Image(); tex.onload=()=>{
+        const ly=H*(this.state.arLinePct/100);
+        const pat=x.createPattern(tex,'repeat');
+        x.save(); x.globalAlpha=.88; x.globalCompositeOperation='multiply';
+        x.fillStyle=pat; x.fillRect(0,ly,W,H-ly);
+        x.restore();
+        x.fillStyle='rgba(0,0,0,.2)'; x.fillRect(0,ly,W,(H-ly)*0.4);
+        const a=document.createElement('a'); a.href=c.toDataURL('image/jpeg',0.9); a.download='diyar-ar.jpg'; a.click();
+      }; tex.src=this.texFor(this.state.arFloor);
+    }; im.src=img;
+  };
+
+  /* ---------- COLOR DETECTOR ---------- */
+  onColorUpload=(e)=>{
+    const f=e.target.files&&e.target.files[0]; if(!f) return;
+    const rd=new FileReader(); rd.onload=ev=>{
+      const im=new Image(); im.onload=()=>{
+        const c=document.createElement('canvas'); c.width=40;c.height=40;
+        const x=c.getContext('2d'); x.drawImage(im,0,0,40,40);
+        const d=x.getImageData(0,0,40,40).data; let r=0,g=0,b=0,n=0;
+        for(let i=0;i<d.length;i+=4){ r+=d[i];g+=d[i+1];b+=d[i+2];n++; }
+        r=Math.round(r/n);g=Math.round(g/n);b=Math.round(b/n);
+        const hex='#'+[r,g,b].map(v=>v.toString(16).padStart(2,'0')).join('');
+        // closest product by color distance
+        let best=null,bd=1e9;
+        this.PRODUCTS.forEach(p=>{ const pc=this.hexRgb(p.color); const dist=Math.hypot(pc[0]-r,pc[1]-g,pc[2]-b); if(dist<bd){bd=dist;best=p;} });
+        this.setState({colorImg:ev.target.result, colorDom:hex, colorMatch:best.id});
+      }; im.src=ev.target.result;
+    }; rd.readAsDataURL(f);
+  };
+  hexRgb(h){ let c=h.replace('#',''); return [parseInt(c.slice(0,2),16),parseInt(c.slice(2,4),16),parseInt(c.slice(4,6),16)]; }
+
+  /* ---------- QUOTE PDF ---------- */
+  downloadQuote=()=>{
+    const p=this.prod(this.state.calcProductId); const area=parseFloat(this.state.calcArea)||0;
+    const mat=p.price*area, inst=p.install*area, total=mat+inst;
+    const W=900,H=1200,c=document.createElement('canvas'); c.width=W;c.height=H; const x=c.getContext('2d');
+    x.fillStyle='#efe7d6'; x.fillRect(0,0,W,H);
+    x.fillStyle='#34331f'; x.fillRect(0,0,W,150);
+    x.fillStyle='#c9a24b'; x.font='bold 46px Tajawal, sans-serif'; x.textAlign='left';
+    x.fillText(this.t.brand, 60, 95);
+    x.fillStyle='#cabfa3'; x.font='22px Tajawal, sans-serif'; x.fillText(this.ar?'عرض سعر مبدئي':'Price Quote', 60, 128);
+    // product swatch
+    const tx=new Image(); tx.onload=()=>{
+      x.save(); x.beginPath(); x.roundRect(60,200,200,200,18); x.clip(); x.drawImage(tx,60,200,200,200); x.restore();
+      finish();
+    }; tx.onerror=finish; tx.src=this.texFor(p.id);
+    const self=this;
+    function finish(){
+      x.fillStyle='#2b281f'; x.textAlign=self.ar?'right':'left'; const tx0=self.ar?W-60:300;
+      x.font='bold 38px Tajawal, sans-serif'; x.fillText(self.pn(p), tx0, 250);
+      x.fillStyle='#8a6326'; x.font='26px Tajawal, sans-serif'; x.fillText(p.price+' '+self.t.perM2, tx0, 295);
+      x.fillStyle='#6b6450'; x.font='22px Tajawal, sans-serif'; x.fillText((self.ar?'المساحة: ':'Area: ')+area+' m²', tx0, 340);
+      // table
+      let y=480; x.textAlign='left'; x.strokeStyle='rgba(52,51,31,.2)';
+      const rows=[[self.t.calcMaterial, mat],[self.t.calcInstall, inst]];
+      x.font='26px Tajawal, sans-serif';
+      rows.forEach(rw=>{ x.fillStyle='#6b6450'; x.fillText(rw[0],60,y); x.fillStyle='#2b281f'; x.textAlign='right'; x.fillText(Math.round(rw[1])+' SAR',W-60,y); x.textAlign='left'; y+=58; x.beginPath();x.moveTo(60,y-30);x.lineTo(W-60,y-30);x.stroke(); });
+      y+=20; x.fillStyle='#34331f'; x.fillRect(60,y-10,W-120,90);
+      x.fillStyle='#f6f0e3'; x.font='bold 30px Tajawal, sans-serif'; x.fillText(self.t.calcTotal,90,y+48);
+      x.fillStyle='#c9a24b'; x.textAlign='right'; x.font='bold 40px Tajawal, sans-serif'; x.fillText(Math.round(total)+' SAR',W-90,y+50);
+      x.textAlign='left'; x.fillStyle='#6b6450'; x.font='20px Tajawal, sans-serif';
+      x.fillText((self.ar?'صالح ٣٠ يوم · ':'Valid 30 days · ')+new Date().toLocaleDateString(), 60, y+170);
+      x.fillText(self.t.address+' · '+self.t.hours, 60, y+205);
+      const a=document.createElement('a'); a.href=c.toDataURL('image/jpeg',0.92); a.download='diyar-quote.jpg'; a.click();
+    }
+  };
+
+  openWhats=()=>{ window.open('https://wa.me/966553353448','_blank'); };
+  scrollTo(id){ const el=document.getElementById(id); if(el) el.scrollIntoView; const top=el?el.getBoundingClientRect().top+window.scrollY-70:0; window.scrollTo({top,behavior:'smooth'}); }
+
+  /* ---------- RENDER VALS ---------- */
+  renderVals(){
+    const t=this.t, ar=this.ar;
+    const accents={ 'نحاسي':['#b0843a','#8a6326','#c9a24b'], 'زيتوني':['#6f7a3a','#4f5827','#97a24b'], 'طيني':['#b0613a','#8a3f26','#c97a4b'] };
+    const acc=accents[this.props.accent]||accents['نحاسي'];
+    const modern=(this.props.vibe==='عصري مينمال');
+    const themeVars='--ac:'+acc[0]+';--acd:'+acc[1]+';--acl:'+acc[2]+';--pat:'+(modern?'.12':'.5')+';--patD:'+(modern?'.06':'.18')+";--hf:"+(modern?"'El Messiri'":"'Reem Kufi'")+';';
+    const dotStyle=(on)=> 'width:7px;height:7px;border-radius:50%;background:'+(on?'#c9a24b':'rgba(255,255,255,.18)')+';';
+    const swatch=(id,active,ring)=>({ id, name:this.pn(this.prod(id)),
+      style:'flex-shrink:0;width:'+(ring?'46px':'46px')+';height:46px;border-radius:12px;cursor:pointer;background-color:'+this.prod(id).color+';background-image:url('+this.texFor(id)+');background-size:cover;border:2px solid '+(active?(ring||'#b0843a'):'rgba(255,255,255,.25)')+';box-shadow:'+(active?'0 0 0 3px rgba(201,162,75,.3)':'none')+';transition:.2s;' });
+
+    // hero floors
+    const heroFloors=this.HERO_FLOORS.map(id=>({...swatch(id,this.state.heroFloor===id), select:()=>this.setState({heroFloor:id,autoCycle:false})}));
+    const hp=this.prod(this.state.heroFloor);
+
+    // rooms
+    const rooms=Object.entries(this.ROOMS).map(([k,r])=>({ label:ar?r.ar:r.en,
+      style:'flex:1;padding:8px 4px;border-radius:9px;border:0;cursor:pointer;font-family:Tajawal,sans-serif;font-size:11.5px;font-weight:700;transition:.2s;background:'+(this.state.activeRoom===k?'#34331f':'transparent')+';color:'+(this.state.activeRoom===k?'#f6f0e3':'#8a7f66')+';',
+      select:()=>this.setState({activeRoom:k}) }));
+    const room=this.ROOMS[this.state.activeRoom];
+
+    // AR
+    const arTabs=[['upload',t.arTabUpload],['camera',t.arTabCam],['demo',t.arTabDemo]].map(([k,l])=>({label:l,
+      style:'flex:1;padding:9px 4px;border-radius:9px;border:0;cursor:pointer;font-family:Tajawal,sans-serif;font-size:12px;font-weight:700;background:'+(this.state.arTab===k?'#c9a24b':'transparent')+';color:'+(this.state.arTab===k?'#2b281f':'#cabfa3')+';',
+      select:()=>this.setState({arTab:k, arCamState:k==='camera'?'idle':this.state.arCamState})}));
+    const arFloors=this.PRODUCTS.map(p=>({...swatch(p.id,this.state.arFloor===p.id,'#c9a24b'), select:()=>this.setState({arFloor:p.id})}));
+    const afp=this.prod(this.state.arFloor);
+    const isUpload=this.state.arTab==='upload', isCam=this.state.arTab==='camera', isDemo=this.state.arTab==='demo';
+    const camOn=this.state.arCamState==='on';
+
+    // catalog
+    const cats=[['all',t.catTitle==='Catalog'?'All':'الكل'],['parquet',ar?'باركيه':'Parquet'],['ceramic',ar?'سيراميك':'Ceramic'],['porcelain',ar?'بورسلين':'Porcelain'],['spc','SPC']];
+    const categories=cats.map(([k,l])=>({label:l,
+      style:'flex-shrink:0;padding:8px 15px;border-radius:20px;border:1px solid '+(this.state.catFilter===k?'#8a6326':'rgba(52,51,31,.16)')+';cursor:pointer;font-family:Tajawal,sans-serif;font-size:12.5px;font-weight:700;background:'+(this.state.catFilter===k?'#8a6326':'#fff')+';color:'+(this.state.catFilter===k?'#fff':'#43412a')+';',
+      select:()=>this.setState({catFilter:k})}));
+    const catLabelOf=(c)=>({parquet:ar?'باركيه':'Parquet',ceramic:ar?'سيراميك':'Ceramic',porcelain:ar?'بورسلين':'Porcelain',spc:'SPC'})[c];
+    const catalogProducts=this.PRODUCTS.filter(p=>this.state.catFilter==='all'||p.cat===this.state.catFilter).map(p=>({
+      id:p.id, name:this.pn(p), price:p.price, color:p.color, tex:this.texFor(p.id), catLabel:catLabelOf(p.cat),
+      zoom:()=>this.setState({zoom:p.id}),
+      toCalc:()=>{ this.setState({calcProductId:p.id}); this.scrollTo('calc'); },
+      toCompare:()=>{ this.setState({compareAId:p.id}); this.scrollTo('compare'); }
+    }));
+
+    // calculator
+    const cp=this.prod(this.state.calcProductId); const area=parseFloat(this.state.calcArea)||0;
+    const fmt=(n)=>Math.round(n).toLocaleString('en-US')+' '+(ar?'ر.س':'SAR');
+
+    // advisor
+    const step=this.state.advisorStep; const q=this.ADVISOR_Q[step]||this.ADVISOR_Q[0];
+    const advisorBars=this.ADVISOR_Q.map((_,i)=>({style:'flex:1;height:5px;border-radius:3px;background:'+(i<=step?'#b0843a':'rgba(52,51,31,.12)')+';'}));
+    const advisorOptions=q.opts.map(o=>({label:ar?o.ar:o.en,
+      style:'padding:13px 10px;border-radius:11px;border:1px solid rgba(52,51,31,.14);background:#faf6ec;cursor:pointer;font-family:Tajawal,sans-serif;font-size:13px;font-weight:600;color:#2b281f;text-align:center;transition:.15s;',
+      select:()=>{ const ans={...this.state.advisorAns,[q.key]:o.v}; if(step>=this.ADVISOR_Q.length-1){ this.setState({advisorAns:ans,advisorDone:true}); } else { this.setState({advisorAns:ans,advisorStep:step+1}); } }}));
+    const advisorResults=this.advisorResultsData.map(r=>({ name:this.pn(r.p), pct:r.pct, color:r.p.color, tex:this.texFor(r.p.id), reason:this.advisorReason(r.p,this.state.advisorAns), zoom:()=>this.setState({zoom:r.p.id}) }));
+
+    // color
+    const cmatch=this.state.colorMatch?this.prod(this.state.colorMatch):null;
+
+    // compare
+    const ca=this.prod(this.state.compareAId), cb=this.prod(this.state.compareBId);
+    const catRows=[['parquet',ar?'باركيه':'Parquet'],['ceramic',ar?'سيراميك':'Ceramic'],['porcelain',ar?'بورسلين':'Porcelain'],['spc','SPC']].map(([c,lbl])=>{
+      const ps=this.PRODUCTS.filter(p=>p.cat===c); const avg=(k)=>Math.round(ps.reduce((s,p)=>s+p[k],0)/ps.length);
+      const props=[['warmth',ar?'دفء':'Warm'],['luxury',ar?'فخامة':'Lux'],['water',ar?'ماء':'Water'],['durab',ar?'متانة':'Tough']].map(([k,pl])=>({
+        label:pl, dots:[1,2,3,4,5].map(i=>({style:dotStyle(i<=avg(k))})) }));
+      return {cat:lbl, props};
+    });
+    const cmpSentence=this.compareSentence(ca,cb);
+
+    // chat
+    const chatMsgs=this.state.chatMsgs.map(m=>{
+      const txt=m.key==='welcome'?t.chatWelcome||(ar?'هلا! اسألني عن الأسعار، التركيب، الضمان، أو احجز موعد.':'Hi! Ask me about prices, installation, warranty, or book a visit.'):m.text;
+      const isUser=m.role==='user';
+      return { text:txt, showWA:!!m.wa,
+        wrap:'display:flex;flex-direction:column;align-items:'+(isUser?'flex-end':'flex-start')+';',
+        bubble:'max-width:82%;padding:10px 14px;border-radius:'+(isUser?'16px 16px 4px 16px':'16px 16px 16px 4px')+';font-size:13px;line-height:1.55;background:'+(isUser?'#8a6326':'#fff')+';color:'+(isUser?'#fff':'#2b281f')+';border:'+(isUser?'0':'1px solid rgba(52,51,31,.08)')+';' };
+    });
+    const chips=[[ar?'الأسعار':'Prices',ar?'كم الأسعار؟':'How much?'],[ar?'الضمان':'Warranty',ar?'وش الضمان؟':'Warranty?'],[ar?'احجز موعد':'Book',ar?'أبي أحجز موعد':'I want to book']].map(([l,msg])=>({label:l, send:()=>this.pushUser(msg)}));
+
+    // zoom
+    const zp=this.state.zoom?this.prod(this.state.zoom):null;
+    const zoomDesc=zp?this.zoomDesc(zp):'';
+
+    return {
+      dir: ar?'rtl':'ltr', t, langBtn:t.langBtn, themeVars,
+      toggleLang:()=>this.setState({lang:ar?'en':'ar'}),
+      openWhats:this.openWhats,
+      chipSide: ar?'right':'left', chipSideAlt: ar?'left':'right', fabSide: ar?'left':'right',
+
+      // hero
+      rooms, room, heroFloors, heroFloorTex:this.texFor(this.state.heroFloor), heroFloorColor:hp.color, heroFloorName:this.pn(hp),
+      goAR:()=>this.scrollTo('ar'), goAdvisor:()=>this.scrollTo('advisor'),
+
+      // AR
+      arTabs, arFloors, arStageRef:this.arStageRef, arVideoRef:this.arVideoRef, arFloorsRef:this.arFloorsRef,
+      arUploadRef:this.arUploadRef,
+      arImage:this.state.arImage, arLinePct:this.state.arLinePct, arFloorColor:afp.color,
+      arShowUpload: isUpload && !!this.state.arImage,
+      arShowEmpty: isUpload && !this.state.arImage,
+      arShowVideo: isCam && camOn,
+      arShowDemo: isDemo,
+      arFloorVisible: (isUpload&&!!this.state.arImage) || (isCam&&camOn) || isDemo,
+      arHud: isDemo || (isCam&&camOn),
+      arDenied: isCam && this.state.arCamState==='denied',
+      arIsUpload:isUpload, arIsCam:isCam,
+      startLineDrag:this.startLineDrag, onArUpload:this.onArUpload, startCam:this.startCam, saveAR:this.saveAR,
+
+      // advisor
+      advisorActive:!this.state.advisorDone, advisorDone:this.state.advisorDone,
+      advisorBars, advisorOptions, advisorResults,
+      advisorStepLabel:(ar?'سؤال ':'Question ')+(step+1)+' / '+this.ADVISOR_Q.length,
+      advisorQ: ar?q.ar:q.en,
+      restartAdvisor:()=>this.setState({advisorStep:0,advisorAns:{},advisorDone:false}),
+
+      // color
+      colorImg:this.state.colorImg, colorImgBg:'#2f2d22', colorNoImg:!this.state.colorImg,
+      colorHasResult:!!this.state.colorMatch, colorNoResult:!this.state.colorMatch,
+      colorDom:this.state.colorDom||'#000', onColorUpload:this.onColorUpload,
+      colorMatchName:cmatch?this.pn(cmatch):'', colorMatchColor:cmatch?cmatch.color:'#000', colorMatchTex:cmatch?this.texFor(cmatch.id):'',
+
+      // catalog
+      categories, catalogProducts,
+
+      // calculator
+      allProducts:this.PRODUCTS.map(p=>({id:p.id,name:this.pn(p)})),
+      calcProductId:this.state.calcProductId, calcArea:this.state.calcArea,
+      calcColor:cp.color, calcTex:this.texFor(cp.id),
+      calcMat:fmt(cp.price*area), calcInstall:fmt(cp.install*area), calcTotal:fmt((cp.price+cp.install)*area),
+      onCalcProduct:(e)=>this.setState({calcProductId:e.target.value}),
+      onCalcArea:(e)=>this.setState({calcArea:e.target.value}),
+      downloadQuote:this.downloadQuote,
+
+      // compare
+      catCompareRows:catRows,
+      compareAId:this.state.compareAId, compareBId:this.state.compareBId,
+      onCompareA:(e)=>this.setState({compareAId:e.target.value}), onCompareB:(e)=>this.setState({compareBId:e.target.value}),
+      compareAName:this.pn(ca), compareBName:this.pn(cb), compareAPrice:ca.price, compareBPrice:cb.price,
+      compareAColor:ca.color, compareBColor:cb.color, compareATex:this.texFor(ca.id), compareBTex:this.texFor(cb.id),
+      compareSentence:cmpSentence,
+
+      // why / testimonials
+      whyItems:this.WHY, testimonials:this.TESTI, testiRef:this.testiRef,
+      testiScrollStart:()=>{ const e=this.testiRef.current; if(e) e.scrollBy({left: this.ar?300:-300, behavior:'smooth'}); },
+      testiScrollEnd:()=>{ const e=this.testiRef.current; if(e) e.scrollBy({left: this.ar?-300:300, behavior:'smooth'}); },
+
+      // chat
+      chatOpen:this.state.chatOpen, chatClosed:!this.state.chatOpen,
+      toggleChat:()=>this.setState({chatOpen:!this.state.chatOpen}),
+      chatMsgs, chatChips:chips, chatScrollRef:this.chatScrollRef,
+      chatInput:this.state.chatInput,
+      onChatInput:(e)=>this.setState({chatInput:e.target.value}),
+      onChatKey:(e)=>{ if(e.key==='Enter'){ this.pushUser(this.state.chatInput); } },
+      sendChat:()=>this.pushUser(this.state.chatInput),
+
+      // zoom
+      zoomActive:!!this.state.zoom, zoomName:zp?this.pn(zp):'', zoomColor:zp?zp.color:'#000', zoomTex:zp?this.texFor(zp.id):'', zoomDesc,
+      closeZoom:()=>this.setState({zoom:null}),
+      zoomToCalc:()=>{ if(zp){ this.setState({calcProductId:zp.id, zoom:null}); this.scrollTo('calc'); } },
+    };
+  }
+
+  zoomDesc(p){
+    const txt={ wood:{ar:'حبيبات خشبية طبيعية بدفء وفخامة، مولّدة بالكامل بالكود.',en:'Natural wood grain with warmth and luxury, fully code-generated.'},
+      spc:{ar:'ألواح SPC مقاومة ماء وخدش، دافئة تحت القدم.',en:'Water- and scratch-resistant SPC planks, warm underfoot.'},
+      marble:{ar:'عروق رخامية ناعمة بإحساس راقٍ وفخم.',en:'Soft marble veining with a refined, luxurious feel.'},
+      stone:{ar:'ملمس حجري طبيعي متين ومقاوم للرطوبة.',en:'Durable natural stone texture, moisture resistant.'},
+      ceramic:{ar:'سطح سيراميكي أملس سهل التنظيف ومقاوم للماء.',en:'Smooth ceramic surface, easy to clean and water resistant.'},
+      clay:{ar:'طابع طيني تراثي دافئ مستوحى من العمارة المحلية.',en:'Warm heritage clay character inspired by local architecture.'} };
+    return this.ar?txt[p.tx].ar:txt[p.tx].en;
+  }
+  compareSentence(a,b){
+    if(a.id===b.id) return this.ar?'اختر منتجين مختلفين للمقارنة.':'Pick two different products to compare.';
+    const cheaper = (a.price+a.install)<=(b.price+b.install)?a:b;
+    const lux = a.luxury>=b.luxury?a:b;
+    const water = a.water>=b.water?a:b;
+    if(this.ar){
+      return this.pn(a)+' و'+this.pn(b)+': '+this.pn(cheaper)+' أوفر سعرًا، بينما '+this.pn(lux)+' يعطي فخامة أعلى. '+
+        (water.water>=5?('للمناطق الرطبة، '+this.pn(water)+' الأنسب لمقاومته العالية للماء.'):('كلاهما مناسب للمناطق الجافة.'));
+    }
+    return this.pn(a)+' vs '+this.pn(b)+': '+this.pn(cheaper)+' is more affordable, while '+this.pn(lux)+' feels more luxurious. '+
+      (water.water>=5?('For wet areas, '+this.pn(water)+' fits best with its high water resistance.'):('Both suit dry areas.'));
+  }
+  get WHY(){ return [
+    {icon:'🚚', t:{ar:'توصيل احترافي',en:'Pro delivery'}, d:{ar:'توصيل وتركيب بفريق مدرّب وتنظيف بعد الانتهاء.',en:'Trained team delivery, install, and post-job cleanup.'}},
+    {icon:'🛡️', t:{ar:'ضمان حقيقي',en:'Real warranty'}, d:{ar:'حتى ١٥ سنة على المنتج وسنتين على التركيب.',en:'Up to 15 years on product, 2 on installation.'}},
+    {icon:'⚡', t:{ar:'رد فوري',en:'Instant reply'}, d:{ar:'مساعد ذكي يرد فورًا وواتساب مباشر مع الفريق.',en:'AI assistant replies instantly, direct WhatsApp too.'}},
+    {icon:'🤝', t:{ar:'أسعار صادقة',en:'Honest pricing'}, d:{ar:'سعر شامل واضح بدون مفاجآت، وحاسبة فورية.',en:'Clear all-in pricing, no surprises, instant calculator.'}},
+  ].map(w=>({icon:w.icon, title:this.ar?w.t.ar:w.t.en, desc:this.ar?w.d.ar:w.d.en})); }
+  get TESTI(){ return [
+    {q:{ar:'شفت أرضية المجلس بصورتي قبل ما أشتري — وفّرت عليّ تردد أسابيع. التركيب كان نظيف وسريع.',en:'I saw my majlis floor in my own photo before buying — saved me weeks of doubt. Clean, fast install.'}, n:'أبو فيصل', c:{ar:'الرياض',en:'Riyadh'}, i:'ف'},
+    {q:{ar:'المستشار الذكي رشّح لي بورسلين للمطبخ وكان اختيار موفق. خدمة راقية وأسعار صادقة.',en:'The AI advisor recommended porcelain for my kitchen — spot on. Premium service, honest prices.'}, n:'نوف العتيبي', c:{ar:'جدة',en:'Jeddah'}, i:'ن'},
+    {q:{ar:'حسبت التكلفة بنفسي بثوانٍ وحملت عرض السعر. شفافية مريحة وفريق محترم.',en:'Calculated my cost in seconds and downloaded the quote. Refreshing transparency, respectful team.'}, n:'خالد الدوسري', c:{ar:'الدمام',en:'Dammam'}, i:'خ'},
+  ].map(ts=>({quote:this.ar?ts.q.ar:ts.q.en, name:ts.n, city:this.ar?ts.c.ar:ts.c.en, initial:ts.i})); }
+}
+</script>
+</body>
+</html>
