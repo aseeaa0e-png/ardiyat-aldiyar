@@ -4,6 +4,18 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>أرضيات الديار — الشوروم الرقمي</title>
+<meta name="description" content="معرض أرضيات الديار الرقمي — شوف أرضيتك قبل ما تشتريها. معاينة بتقنية AR، مستشار ذكي، حاسبة تكلفة فورية، وكتالوج كامل. باركيه، سيراميك، بورسلين، SPC.">
+<meta name="theme-color" content="#34331f">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%2334331f'/%3E%3Crect x='30' y='30' width='40' height='40' fill='none' stroke='%23c9a24b' stroke-width='6' transform='rotate(45 50 50)'/%3E%3C/svg%3E">
+<meta property="og:type" content="website">
+<meta property="og:title" content="أرضيات الديار — الشوروم الرقمي">
+<meta property="og:description" content="شوف أرضيتك قبل ما تشتريها — معاينة AR، مستشار ذكي، وحاسبة تكلفة فورية.">
+<meta property="og:image" content="poster.jpg">
+<meta property="og:locale" content="ar_SA">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="أرضيات الديار — الشوروم الرقمي">
+<meta name="twitter:description" content="شوف أرضيتك قبل ما تشتريها — معاينة AR، مستشار ذكي، وحاسبة تكلفة فورية.">
+<meta name="twitter:image" content="poster.jpg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Reem+Kufi:wght@400;500;600;700&family=El+Messiri:wght@500;600;700&family=Tajawal:wght@300;400;500;700;800&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -629,6 +641,7 @@ function render(){
   const root=h('div',{style:`direction:${dir};font-family:'Tajawal',sans-serif;max-width:480px;margin:0 auto;background:#efe7d6;min-height:100vh;position:relative;color:#2b281f;overflow-x:hidden;box-shadow:0 0 60px rgba(0,0,0,.18);`},
     renderHeader(tr,ar,ac,acd,acl,hf),
     renderVideoHero(tr,ar,ac,acd,acl,hf),
+    renderOfferBar(tr,ar,ac,acd,acl,hf),
     renderAR(tr,ar,ac,acd,acl,hf,side,sideAlt),
     renderAdvisor(tr,ar,ac,acd,acl,hf),
     renderColorDetector(tr,ar,ac,acd,acl,hf),
@@ -670,7 +683,7 @@ function render(){
 // ============================================================
 function renderVideoHero(tr,ar,ac,acd,acl,hf){
   if(!_introVideo){
-    _introVideo=h('video',{autoplay:'',muted:'',playsinline:'',
+    _introVideo=h('video',{autoplay:'',muted:'',playsinline:'',poster:'poster.jpg','preload':'metadata',
       style:'position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.88;'},
       h('source',{src:'intro.mp4',type:'video/mp4'})
     );
@@ -699,6 +712,26 @@ function renderVideoHero(tr,ar,ac,acd,acl,hf){
           onClick:()=>scrollTo('advisor')},tr.ctaAdvisor)
       )
     )
+  );
+}
+
+// ============================================================
+// OFFER BAR (mini, after video)
+// ============================================================
+function renderOfferBar(tr,ar,ac,acd,acl,hf){
+  return h('div',{style:`display:flex;align-items:center;gap:12px;padding:12px 16px;background:linear-gradient(135deg,${ac},${acd});color:#fff;position:relative;overflow:hidden;`},
+    h('div',{style:'position:absolute;inset:0;opacity:.14;background-image:repeating-linear-gradient(45deg,#fff 0 1px,transparent 1px 14px);'}),
+    h('div',{style:'position:relative;flex:1;min-width:0;'},
+      h('div',{style:'display:flex;align-items:center;gap:7px;'},
+        h('span',{style:'background:rgba(255,255,255,.22);font-size:10px;font-weight:800;padding:2px 8px;border-radius:10px;flex-shrink:0;'},tr.offerTitle),
+        h('span',{style:'font-size:13px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;'},tr.offerText)
+      ),
+      h('div',{style:'display:flex;align-items:baseline;gap:7px;margin-top:2px;'},
+        h('span',{style:'font-size:12px;text-decoration:line-through;opacity:.7;'},tr.offerWas),
+        h('span',{style:'font-size:15px;font-weight:800;'},tr.offerNow)
+      )
+    ),
+    h('button',{style:`position:relative;flex-shrink:0;background:#fff;color:${acd};border:0;padding:10px 18px;border-radius:22px;font-family:'Tajawal',sans-serif;font-weight:800;font-size:13px;cursor:pointer;box-shadow:0 4px 12px rgba(0,0,0,.18);`,onClick:openWhats},tr.offerCta)
   );
 }
 
