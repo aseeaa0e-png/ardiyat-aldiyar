@@ -157,8 +157,8 @@ const STR = {
 };
 
 const ADVISOR_Q = [
-  {key:'space',ar:'وش المساحة اللي تبي تغطيها؟',en:'Which space are you covering?',opts:[
-    {v:'living',ar:'مجلس / صالة',en:'Living / Majlis'},{v:'bedroom',ar:'غرفة نوم',en:'Bedroom'},{v:'kitchen',ar:'مطبخ',en:'Kitchen'},{v:'wet',ar:'حمام / مبلّل',en:'Bathroom / Wet'}]},
+  {key:'space',ar:'أي المساحات التي تود تغطيتها؟',en:'Which space are you covering?',opts:[
+    {v:'living',ar:'مجلس / صالة',en:'Living / Majlis'},{v:'bedroom',ar:'غرفة نوم',en:'Bedroom'},{v:'kitchen',ar:'مطبخ',en:'Kitchen'},{v:'wet',ar:'حمام / مبلّل',en:'Bathroom / Wet'},{v:'outdoor',ar:'الفناء الخارجي',en:'Outdoor'}]},
   {key:'color',ar:'لون ديكورك الحالي أقرب لـ؟',en:'Your current decor leans toward?',opts:[
     {v:'light',ar:'فاتح ومحايد',en:'Light & neutral'},{v:'warm',ar:'دافئ وترابي',en:'Warm & earthy'},{v:'grey',ar:'رمادي وحديث',en:'Grey & modern'},{v:'dark',ar:'غامق وجريء',en:'Dark & bold'}]},
   {key:'char',ar:'الطابع اللي يعجبك؟',en:'The character you love?',opts:[
@@ -285,7 +285,7 @@ function scoreProduct(p,a){
   let s=0;
   if(a.color && p.fam===a.color) s+=30;
   if(a.char && p.char===a.char) s+=30;
-  if(a.space==='kitchen'||a.space==='wet') s+=p.water*4;
+  if(a.space==='kitchen'||a.space==='wet'||a.space==='outdoor') s+=p.water*4;
   if(a.space==='living') s+=p.luxury*2+p.warmth*2;
   if(a.space==='bedroom') s+=p.warmth*3;
   if(a.budget==='eco') s+=(170-(p.price+p.install))*0.18;
@@ -296,7 +296,7 @@ function scoreProduct(p,a){
 function advisorReason(p,a){
   const bits=[];
   if(a.char===p.char){const m={heritage:{ar:'طابع تراثي دافئ',en:'warm heritage character'},modern:{ar:'إحساس عصري بسيط',en:'clean modern feel'},lux:{ar:'فخامة راقية',en:'refined luxury'},practical:{ar:'عملي ومتين',en:'practical & tough'}};bits.push(isAR()?m[p.char].ar:m[p.char].en);}
-  if((a.space==='kitchen'||a.space==='wet')&&p.water>=5)bits.push(isAR()?'مقاومة ماء ممتازة':'excellent water resistance');
+  if((a.space==='kitchen'||a.space==='wet'||a.space==='outdoor')&&p.water>=5)bits.push(isAR()?'مقاومة ماء ممتازة':'excellent water resistance');
   if(a.color===p.fam)bits.push(isAR()?'يطابق لون ديكورك':'matches your decor tone');
   if(a.budget==='eco'&&(p.price+p.install)<=120)bits.push(isAR()?'ضمن ميزانيتك':'within budget');
   if(!bits.length)bits.push(isAR()?'توازن ممتاز بين الفخامة والمتانة':'great balance of luxury & durability');
