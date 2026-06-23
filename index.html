@@ -101,7 +101,7 @@ function prod(id){ return PRODUCTS.find(p=>p.id===id); }
 
 const STR = {
   ar:{
-    brand:'أرضيات الديار',langBtn:'EN',whatsapp:'واتساب',
+    brand:'أرضيات الديار',langBtn:'EN',whatsapp:'واتساب',contractors:'للمقاولين',
     heroEyebrow:'معاينة حيّة بتقنية ذكية',heroTitle:'شوف أرضيتك قبل ما تشتريها',
     heroSub:'بدّل الأرضية بضغطة، جرّبها بصورة غرفتك، وخلّ التقنية الذكية ترشّح لك الأنسب.',
     heroSwatchLabel:'بدّل الأرضية',ctaTry:'جرّبها بصورتك',ctaAdvisor:'اسأل المستشار',
@@ -128,7 +128,7 @@ const STR = {
     chipPricesQ:'كم الأسعار؟',chipWarrantyQ:'وش الضمان؟',chipBookQ:'أبي أحجز موعد',
   },
   en:{
-    brand:'Al-Diyar Floors',langBtn:'ع',whatsapp:'WhatsApp',
+    brand:'Al-Diyar Floors',langBtn:'ع',whatsapp:'WhatsApp',contractors:'For Contractors',
     heroEyebrow:'Smart live preview',heroTitle:'See your floor before you buy it',
     heroSub:"Swap floors in a tap, try them in a photo of your room, and let smart tech pick your best match.",
     heroSwatchLabel:'Swap the floor',ctaTry:'Try in your photo',ctaAdvisor:'Ask the advisor',
@@ -269,6 +269,10 @@ function getPatOpacity(){ return S.vibe==='عصري مينمال'?'.12':'.5'; }
 function getPatDOpacity(){ return S.vibe==='عصري مينمال'?'.06':'.18'; }
 
 function openWhats(){ window.open('https://wa.me/966553353448','_blank'); }
+function openWhatsContractors(){
+  const msg=isAR()?'أبحث عن أسعار جملة وعينات لمشروعي':'I need wholesale prices and samples for my project';
+  window.open('https://wa.me/966553353448?text='+encodeURIComponent(msg),'_blank');
+}
 function scrollTo(id){
   const el=document.getElementById(id);
   if(el){ const top=el.getBoundingClientRect().top+window.scrollY-70; window.scrollTo({top,behavior:'smooth'}); }
@@ -539,6 +543,7 @@ function renderHeader(tr,ar,ac,acd,acl,hf){
     ),
     h('div',{style:'display:flex;align-items:center;gap:8px;'},
       h('button',{style:`font-family:'${hf}',serif;font-size:13px;font-weight:600;border:1px solid rgba(52,51,31,.2);background:transparent;color:#43412a;padding:6px 12px;border-radius:20px;cursor:pointer;`,onClick:()=>setState({lang:ar?'en':'ar'})},tr.langBtn),
+      h('button',{style:`font-family:'Tajawal',sans-serif;font-size:12px;font-weight:700;border:1px solid ${acd};background:rgba(176,132,58,.12);color:${acd};padding:8px 13px;border-radius:20px;cursor:pointer;`,onClick:openWhatsContractors},tr.contractors),
       h('button',{style:`display:flex;align-items:center;gap:5px;background:#25785a;color:#fff;border:0;padding:7px 12px;border-radius:20px;font-family:'Tajawal',sans-serif;font-weight:700;font-size:12px;cursor:pointer;box-shadow:0 4px 10px rgba(37,120,90,.3);`,onClick:openWhats},
         h('span',{style:'width:7px;height:7px;border-radius:50%;background:#7fe3b8;',className:'pulse'}),tr.whatsapp
       )
