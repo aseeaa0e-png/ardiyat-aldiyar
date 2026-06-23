@@ -83,18 +83,18 @@ function setState(patch){
 // DATA
 // ============================================================
 const PRODUCTS = [
-  {id:'walnut',cat:'parquet',ar:'باركيه جوز ملكي',en:'Royal Walnut',price:145,install:35,color:'#5a3b22',tx:'wood',tx2:'#3d2716',fam:'warm',char:'lux',warmth:5,luxury:5,water:2,durab:3},
-  {id:'oak',cat:'parquet',ar:'باركيه بلوط طبيعي',en:'Natural Oak',price:120,install:35,color:'#b08a55',tx:'wood',tx2:'#8a6535',fam:'warm',char:'heritage',warmth:4,luxury:4,water:2,durab:3},
-  {id:'greywood',cat:'parquet',ar:'باركيه رمادي حديث',en:'Modern Grey Wood',price:130,install:35,color:'#8e8b86',tx:'wood',tx2:'#5f5e58',fam:'grey',char:'modern',warmth:3,luxury:4,water:2,durab:3},
-  {id:'carrara',cat:'ceramic',ar:'سيراميك رخامي أبيض',en:'Carrara White',price:85,install:25,color:'#e9e6df',tx:'marble',tx2:'#b9b6ad',fam:'light',char:'lux',warmth:2,luxury:5,water:5,durab:4},
-  {id:'beige',cat:'ceramic',ar:'سيراميك بيج كلاسيك',en:'Classic Beige',price:70,install:25,color:'#d8c8ac',tx:'ceramic',tx2:'#bda886',fam:'light',char:'heritage',warmth:3,luxury:3,water:5,durab:4},
-  {id:'concrete',cat:'ceramic',ar:'سيراميك أسمنتي',en:'Concrete Look',price:75,install:25,color:'#a3a097',tx:'ceramic',tx2:'#85827a',fam:'grey',char:'modern',warmth:2,luxury:3,water:5,durab:4},
-  {id:'porcelain1',cat:'porcelain',ar:'بورسلين كالاكاتا',en:'Calacatta Porcelain',price:160,install:30,color:'#eceae3',tx:'marble',tx2:'#9a9488',fam:'light',char:'lux',warmth:2,luxury:5,water:5,durab:5},
-  {id:'porcelain2',cat:'porcelain',ar:'بورسلين حجري داكن',en:'Dark Stone Porcelain',price:140,install:30,color:'#4f4d47',tx:'stone',tx2:'#2f2e2a',fam:'dark',char:'modern',warmth:2,luxury:4,water:5,durab:5},
-  {id:'porcelain3',cat:'porcelain',ar:'بورسلين رملي',en:'Sand Stone Porcelain',price:130,install:30,color:'#c4a987',tx:'stone',tx2:'#a08a64',fam:'warm',char:'heritage',warmth:3,luxury:4,water:5,durab:5},
-  {id:'spc1',cat:'spc',ar:'SPC بلوط دافئ',en:'Warm Oak SPC',price:95,install:20,color:'#bd9863',tx:'spc',tx2:'#977440',fam:'warm',char:'practical',warmth:4,luxury:3,water:5,durab:5},
-  {id:'spc2',cat:'spc',ar:'SPC رمادي مطفي',en:'Matte Grey SPC',price:90,install:20,color:'#9a978f',tx:'spc',tx2:'#6f6d66',fam:'grey',char:'practical',warmth:3,luxury:3,water:5,durab:5},
-  {id:'spc3',cat:'spc',ar:'SPC طيني تراثي',en:'Heritage Clay SPC',price:100,install:20,color:'#b06a44',tx:'clay',tx2:'#8a4d2d',fam:'warm',char:'heritage',warmth:4,luxury:4,water:4,durab:4},
+  {id:'walnut',cat:'parquet',ar:'باركيه جوز ملكي',en:'Royal Walnut',price:75,install:35,color:'#5a3b22',tx:'wood',tx2:'#3d2716',fam:'warm',char:'lux',warmth:5,luxury:5,water:2,durab:3},
+  {id:'oak',cat:'parquet',ar:'باركيه بلوط طبيعي',en:'Natural Oak',price:60,install:35,color:'#b08a55',tx:'wood',tx2:'#8a6535',fam:'warm',char:'heritage',warmth:4,luxury:4,water:2,durab:3},
+  {id:'greywood',cat:'parquet',ar:'باركيه رمادي حديث',en:'Modern Grey Wood',price:65,install:35,color:'#8e8b86',tx:'wood',tx2:'#5f5e58',fam:'grey',char:'modern',warmth:3,luxury:4,water:2,durab:3},
+  {id:'carrara',cat:'ceramic',ar:'سيراميك رخامي أبيض',en:'Carrara White',price:45,install:25,color:'#e9e6df',tx:'marble',tx2:'#b9b6ad',fam:'light',char:'lux',warmth:2,luxury:5,water:5,durab:4},
+  {id:'beige',cat:'ceramic',ar:'سيراميك بيج كلاسيك',en:'Classic Beige',price:35,install:25,color:'#d8c8ac',tx:'ceramic',tx2:'#bda886',fam:'light',char:'heritage',warmth:3,luxury:3,water:5,durab:4},
+  {id:'concrete',cat:'ceramic',ar:'سيراميك أسمنتي',en:'Concrete Look',price:40,install:25,color:'#a3a097',tx:'ceramic',tx2:'#85827a',fam:'grey',char:'modern',warmth:2,luxury:3,water:5,durab:4},
+  {id:'porcelain1',cat:'porcelain',ar:'بورسلين كالاكاتا',en:'Calacatta Porcelain',price:80,install:30,color:'#eceae3',tx:'marble',tx2:'#9a9488',fam:'light',char:'lux',warmth:2,luxury:5,water:5,durab:5},
+  {id:'porcelain2',cat:'porcelain',ar:'بورسلين حجري داكن',en:'Dark Stone Porcelain',price:70,install:30,color:'#4f4d47',tx:'stone',tx2:'#2f2e2a',fam:'dark',char:'modern',warmth:2,luxury:4,water:5,durab:5},
+  {id:'porcelain3',cat:'porcelain',ar:'بورسلين رملي',en:'Sand Stone Porcelain',price:65,install:30,color:'#c4a987',tx:'stone',tx2:'#a08a64',fam:'warm',char:'heritage',warmth:3,luxury:4,water:5,durab:5},
+  {id:'spc1',cat:'spc',ar:'SPC بلوط دافئ',en:'Warm Oak SPC',price:50,install:20,color:'#bd9863',tx:'spc',tx2:'#977440',fam:'warm',char:'practical',warmth:4,luxury:3,water:5,durab:5},
+  {id:'spc2',cat:'spc',ar:'SPC رمادي مطفي',en:'Matte Grey SPC',price:45,install:20,color:'#9a978f',tx:'spc',tx2:'#6f6d66',fam:'grey',char:'practical',warmth:3,luxury:3,water:5,durab:5},
+  {id:'spc3',cat:'spc',ar:'SPC طيني تراثي',en:'Heritage Clay SPC',price:50,install:20,color:'#b06a44',tx:'clay',tx2:'#8a4d2d',fam:'warm',char:'heritage',warmth:4,luxury:4,water:4,durab:4},
 ];
 function prod(id){ return PRODUCTS.find(p=>p.id===id); }
 
@@ -169,7 +169,7 @@ const ADVISOR_Q = [
 ];
 
 const FAQ = [
-  {k:['سعر','أسعار','كم','بكم','price','cost','how much'],ar:'أسعارنا تبدأ من ٧٠ ر.س/م² للسيراميك، وتوصل ١٦٠ ر.س للبورسلين الفاخر. التركيب من ٢٠–٣٥ ر.س/م². استخدم الحاسبة لسعر دقيق.',en:'Prices start at 70 SAR/m² for ceramic up to 160 for premium porcelain. Installation is 20–35 SAR/m². Use the calculator for an exact quote.'},
+  {k:['سعر','أسعار','كم','بكم','price','cost','how much'],ar:'أسعارنا تبدأ من ٣٥ ر.س/م² للسيراميك، وتوصل ٨٠ ر.س للبورسلين الفاخر. التركيب من ٢٠–٣٥ ر.س/م². استخدم الحاسبة لسعر دقيق.',en:'Prices start at 35 SAR/m² for ceramic up to 80 for premium porcelain. Installation is 20–35 SAR/m². Use the calculator for an exact quote.'},
   {k:['تركيب','install','installation','fix'],ar:'فريقنا يركّب احترافيًا خلال ٢–٤ أيام حسب المساحة، مع تجهيز الأرضية وتنظيف بعد التركيب.',en:'Our team installs professionally in 2–4 days depending on area, including floor prep and post-install cleanup.'},
   {k:['ضمان','warranty','guarantee'],ar:'ضمان حتى ١٥ سنة على المنتج وسنتين على التركيب ضد عيوب الصناعة.',en:'Up to 15-year product warranty and 2-year installation warranty against manufacturing defects.'},
   {k:['صيانة','تنظيف','maintenance','clean','care'],ar:'كل أرضياتنا سهلة التنظيف بممسحة رطبة. SPC والبورسلين مقاومة ماء وخدش بشكل ممتاز.',en:'All our floors wipe clean with a damp mop. SPC and porcelain resist water and scratches very well.'},
@@ -177,7 +177,7 @@ const FAQ = [
   {k:['ماء','رطوبة','حمام','مطبخ','water','wet','bathroom'],ar:'للمناطق الرطبة ننصح بالبورسلين أو SPC — مقاومة ماء ١٠٠٪ ومناسبة للحمامات والمطابخ.',en:'For wet areas we recommend porcelain or SPC — 100% water resistant, perfect for bathrooms and kitchens.'},
   {k:['باركيه','خشب','parquet','wood'],ar:'الباركيه يعطي دفء وفخامة طبيعية، مثالي للمجالس وغرف النوم. عندنا جوز، بلوط، ورمادي حديث.',en:'Parquet gives natural warmth and luxury, ideal for majlis and bedrooms. We have walnut, oak, and modern grey.'},
   {k:['توصيل','شحن','delivery','shipping'],ar:'التوصيل داخل الرياض خلال ٢٤–٤٨ ساعة، ومجاني للطلبات فوق ٣٠ م².',en:'Delivery within Riyadh in 24–48h, free for orders above 30 m².'},
-  {k:['spc','اس بي سي'],ar:'SPC أرضية مقاومة ماء وخدش، دافئة تحت القدم، وأسعارها اقتصادية — من ٩٠ ر.س/م².',en:'SPC is water- and scratch-resistant, warm underfoot, and budget-friendly — from 90 SAR/m².'},
+  {k:['spc','اس بي سي'],ar:'SPC أرضية مقاومة ماء وخدش، دافئة تحت القدم، وأسعارها اقتصادية — من ٤٥ ر.س/م².',en:'SPC is water- and scratch-resistant, warm underfoot, and budget-friendly — from 45 SAR/m².'},
   {k:['لون','ألوان','color','colour'],ar:'جرّب «كاشف اللون» وارفع صورة جدارك — نختار لك الأرضية الأقرب تلقائيًا.',en:'Try the "Color detector" and upload a wall photo — we auto-pick the closest floor.'},
   {k:['عرض','خصم','offer','discount'],ar:'عرض حالي: معاينة وتصميم أرضيتك مجانًا (بدل ٢٥٠ ر.س). احجز قبل نهاية الشهر.',en:'Current offer: free floor preview & design (worth 250 SAR). Book before month-end.'},
   {k:['وين','موقع','عنوان','where','location','address'],ar:'معرضنا في حي الياسمين، الرياض. السبت–الخميس ٩ص–١٠م.',en:'Our showroom is in Al-Yasmin, Riyadh. Sat–Thu 9am–10pm.'},
@@ -293,9 +293,9 @@ function scoreProduct(p,a){
   if(a.space==='kitchen'||a.space==='wet'||a.space==='outdoor') s+=p.water*4;
   if(a.space==='living') s+=p.luxury*2+p.warmth*2;
   if(a.space==='bedroom') s+=p.warmth*3;
-  if(a.budget==='eco') s+=(170-(p.price+p.install))*0.18;
+  if(a.budget==='eco') s+=(100-(p.price+p.install))*0.18;
   if(a.budget==='high') s+=(p.price+p.install)*0.12+p.luxury*3;
-  if(a.budget==='mid') s+=10-Math.abs((p.price+p.install)-115)*0.12;
+  if(a.budget==='mid') s+=10-Math.abs((p.price+p.install)-70)*0.12;
   return s;
 }
 function advisorReason(p,a){
@@ -303,7 +303,7 @@ function advisorReason(p,a){
   if(a.char===p.char){const m={heritage:{ar:'طابع تراثي دافئ',en:'warm heritage character'},modern:{ar:'إحساس عصري بسيط',en:'clean modern feel'},lux:{ar:'فخامة راقية',en:'refined luxury'},practical:{ar:'عملي ومتين',en:'practical & tough'}};bits.push(isAR()?m[p.char].ar:m[p.char].en);}
   if((a.space==='kitchen'||a.space==='wet'||a.space==='outdoor')&&p.water>=5)bits.push(isAR()?'مقاومة ماء ممتازة':'excellent water resistance');
   if(a.color===p.fam)bits.push(isAR()?'يطابق لون ديكورك':'matches your decor tone');
-  if(a.budget==='eco'&&(p.price+p.install)<=120)bits.push(isAR()?'ضمن ميزانيتك':'within budget');
+  if(a.budget==='eco'&&(p.price+p.install)<=75)bits.push(isAR()?'ضمن ميزانيتك':'within budget');
   if(!bits.length)bits.push(isAR()?'توازن ممتاز بين الفخامة والمتانة':'great balance of luxury & durability');
   return (isAR()?'لأنه ':'Because it offers ')+bits.slice(0,2).join(isAR()?' و':' and ')+'.';
 }
