@@ -512,11 +512,6 @@ function render(){
   app.innerHTML='';
   app.appendChild(root);
 
-  // restore video stream
-  if(S.arTab==='camera'&&S.arCamState==='on'){
-    const v=document.getElementById('ar-video');
-    if(v&&_stream){v.srcObject=_stream;v.play().catch(()=>{});}
-  }
   // restore upload image
   if(S.arTab==='upload'&&S.arImage){
     const u=document.getElementById('ar-upload-bg');
@@ -613,9 +608,7 @@ function renderHero(tr,ar,ac,acd,acl,hf,side,sideAlt){
 function renderAR(tr,ar,ac,acd,acl,hf,side,sideAlt){
   const patD=getPatDOpacity();
   const isUpload=S.arTab==='upload';
-  const isCam=S.arTab==='camera';
   const isDemo=S.arTab==='demo';
-  const camOn=S.arCamState==='on';
   const afp=prod(S.arFloor);
 
   return h('section',{id:'ar',style:'padding:26px 18px;background:#2b281f;color:#f6f0e3;position:relative;'},
@@ -626,8 +619,8 @@ function renderAR(tr,ar,ac,acd,acl,hf,side,sideAlt){
       h('p',{style:'margin:0 0 16px;font-size:13px;color:#cabfa3;line-height:1.6;'},tr.arSub),
       // Tabs
       h('div',{style:'display:flex;gap:6px;background:rgba(255,255,255,.06);padding:5px;border-radius:13px;margin-bottom:14px;'},
-        ...(['upload','camera','demo']).map((k,i)=>{
-          const labels=[tr.arTabUpload,tr.arTabCam,tr.arTabDemo];
+        ...(['upload','demo']).map((k,i)=>{
+          const labels=[tr.arTabUpload,tr.arTabDemo];
           return h('button',{
             style:`flex:1;padding:9px 4px;border-radius:9px;border:0;cursor:pointer;font-family:'Tajawal',sans-serif;font-size:12px;font-weight:700;background:${S.arTab===k?acl:'transparent'};color:${S.arTab===k?'#2b281f':'#cabfa3'};`,
             onClick:()=>setState({arTab:k})
@@ -643,20 +636,16 @@ function renderAR(tr,ar,ac,acd,acl,hf,side,sideAlt){
           ),
           h('p',{style:'margin:0;font-size:13px;color:#cabfa3;max-width:80%;line-height:1.5;'},tr.arUploadHint)
         ):null,
-        isCam&&camOn?h('video',{id:'ar-video',autoplay:'',playsinline:'',muted:'',style:'position:absolute;inset:0;width:100%;height:100%;object-fit:cover;pointer-events:none;'}):null,
-        isCam&&S.arCamState==='denied'?h('div',{style:'position:absolute;inset:0;display:flex;align-items:center;justify-content:center;text-align:center;padding:24px;background:rgba(21,20,15,.9);'},
-          h('p',{style:'margin:0;font-size:13px;color:#e9c97e;line-height:1.6;'},tr.arCamDenied)
-        ):null,
         isDemo?h('div',{style:'position:absolute;inset:0;background:linear-gradient(170deg,#cdbfa6,#9d8e72);'},
           h('div',{style:'position:absolute;top:30px;left:50%;transform:translateX(-50%);width:90px;height:64px;background:linear-gradient(160deg,#eaf4f7,#bcd0d6);border:5px solid #efe7d6;border-radius:4px;'})
         ):null,
         // Floor overlay
-        ((isUpload&&S.arImage)||(isCam&&camOn)||isDemo)?h('div',{id:'ar-floor-ov',style:`position:absolute;left:0;right:0;bottom:0;top:${S.arLinePct}%;overflow:hidden;`},
+        ((isUpload&&S.arImage)||isDemo)?h('div',{id:'ar-floor-ov',style:`position:absolute;left:0;right:0;bottom:0;top:${S.arLinePct}%;overflow:hidden;`},
           h('div',{style:`position:absolute;left:-30%;right:-30%;top:0;bottom:0;transform:perspective(360px) rotateX(64deg);transform-origin:top center;background-color:${afp.color};${texFor(afp.id)?`background-image:url(${texFor(afp.id)});background-size:cover;`:''}opacity:.82;`}),
           h('div',{style:'position:absolute;inset:0;background:linear-gradient(0deg,rgba(0,0,0,.25),transparent 60%);'})
         ):null,
         // HUD
-        (isDemo||(isCam&&camOn))?h('div',{style:'position:absolute;inset:14px;pointer-events:none;'},
+        isDemo?h('div',{style:'position:absolute;inset:14px;pointer-events:none;'},
           h('div',{style:`position:absolute;top:0;left:0;width:22px;height:22px;border-top:2px solid ${acl};border-left:2px solid ${acl};`}),
           h('div',{style:`position:absolute;top:0;right:0;width:22px;height:22px;border-top:2px solid ${acl};border-right:2px solid ${acl};`}),
           h('div',{style:`position:absolute;bottom:0;left:0;width:22px;height:22px;border-bottom:2px solid ${acl};border-left:2px solid ${acl};`}),
@@ -665,7 +654,7 @@ function renderAR(tr,ar,ac,acd,acl,hf,side,sideAlt){
           h('div',{style:`position:absolute;top:6px;right:6px;background:rgba(201,162,75,.92);color:#2b281f;font-size:10px;font-weight:800;padding:3px 8px;border-radius:10px;`},'AR LIVE')
         ):null,
         // Drag handle
-        ((isUpload&&S.arImage)||(isCam&&camOn)||isDemo)?h('div',{
+        ((isUpload&&S.arImage)||isDemo)?h('div',{
           id:'ar-drag-h',
           style:`position:absolute;left:0;right:0;top:${S.arLinePct}%;height:30px;transform:translateY(-50%);cursor:ns-resize;display:flex;align-items:center;z-index:10;touch-action:none;`,
           onPointerdown:startLineDrag
@@ -680,8 +669,7 @@ function renderAR(tr,ar,ac,acd,acl,hf,side,sideAlt){
           tr.arPick,
           h('input',{type:'file',accept:'image/*',style:'display:none;',onChange:onArUpload})
         ):null,
-        isUpload?h('button',{style:'flex:1;min-width:120px;background:rgba(255,255,255,.1);color:#f6f0e3;border:1px solid rgba(201,162,75,.4);padding:11px;border-radius:11px;font-weight:700;font-size:13px;cursor:pointer;',onClick:saveAR},tr.arSave):null,
-        isCam&&!camOn?h('button',{style:`flex:1;background:${acl};color:#2b281f;border:0;padding:11px;border-radius:11px;font-weight:700;font-size:13px;cursor:pointer;`,onClick:startCam},tr.arCamStart):null
+        isUpload?h('button',{style:'flex:1;min-width:120px;background:rgba(255,255,255,.1);color:#f6f0e3;border:1px solid rgba(201,162,75,.4);padding:11px;border-radius:11px;font-weight:700;font-size:13px;cursor:pointer;',onClick:saveAR},tr.arSave):null
       ),
       // AR floor swatches
       h('div',{style:'display:flex;align-items:center;gap:8px;margin-top:12px;'},
