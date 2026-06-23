@@ -102,6 +102,7 @@ function prod(id){ return PRODUCTS.find(p=>p.id===id); }
 const STR = {
   ar:{
     brand:'أرضيات الديار',langBtn:'EN',whatsapp:'واتساب',contractors:'للمقاولين',
+    contractorsTitle:'للمقاولين والمصممين',contractorsDesc:'أسعار جملة خاصة، حساب الكميات، وعيّنات مجانية لمشاريعك.',contractorsCta:'تواصل لعرض الجملة',
     heroEyebrow:'معاينة حيّة بتقنية ذكية',heroTitle:'شوف أرضيتك قبل ما تشتريها',
     heroSub:'بدّل الأرضية بضغطة، جرّبها بصورة غرفتك، وخلّ التقنية الذكية ترشّح لك الأنسب.',
     heroSwatchLabel:'بدّل الأرضية',ctaTry:'جرّبها بصورتك',ctaAdvisor:'اسأل المستشار',
@@ -129,6 +130,7 @@ const STR = {
   },
   en:{
     brand:'Al-Diyar Floors',langBtn:'ع',whatsapp:'WhatsApp',contractors:'For Contractors',
+    contractorsTitle:'For Contractors & Designers',contractorsDesc:'Special wholesale pricing, quantity estimation, and free samples for your projects.',contractorsCta:'Contact for wholesale',
     heroEyebrow:'Smart live preview',heroTitle:'See your floor before you buy it',
     heroSub:"Swap floors in a tap, try them in a photo of your room, and let smart tech pick your best match.",
     heroSwatchLabel:'Swap the floor',ctaTry:'Try in your photo',ctaAdvisor:'Ask the advisor',
@@ -452,6 +454,7 @@ function pushUser(text){
 // ============================================================
 let _cycle=null;
 let _heroAnim=null,_heroTick=0;
+let _introVideo=null;
 const _texImgs={};
 function startCycle(){
   if(_cycle)clearInterval(_cycle);
@@ -626,7 +629,6 @@ function render(){
   const root=h('div',{style:`direction:${dir};font-family:'Tajawal',sans-serif;max-width:480px;margin:0 auto;background:#efe7d6;min-height:100vh;position:relative;color:#2b281f;overflow-x:hidden;box-shadow:0 0 60px rgba(0,0,0,.18);`},
     renderHeader(tr,ar,ac,acd,acl,hf),
     renderVideoHero(tr,ar,ac,acd,acl,hf),
-    renderHero(tr,ar,ac,acd,acl,hf,side,sideAlt),
     renderAR(tr,ar,ac,acd,acl,hf,side,sideAlt),
     renderAdvisor(tr,ar,ac,acd,acl,hf),
     renderColorDetector(tr,ar,ac,acd,acl,hf),
@@ -667,11 +669,14 @@ function render(){
 // VIDEO HERO
 // ============================================================
 function renderVideoHero(tr,ar,ac,acd,acl,hf){
-  return h('section',{style:'position:relative;height:390px;overflow:hidden;background:#1a1710;'},
-    h('video',{autoplay:'',muted:'',loop:'',playsinline:'',
+  if(!_introVideo){
+    _introVideo=h('video',{autoplay:'',muted:'',playsinline:'',
       style:'position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.88;'},
       h('source',{src:'intro.mp4',type:'video/mp4'})
-    ),
+    );
+  }
+  return h('section',{style:'position:relative;height:390px;overflow:hidden;background:#1a1710;'},
+    _introVideo,
     // Sadu pattern overlay
     h('div',{style:'position:absolute;inset:0;opacity:.22;background-image:repeating-linear-gradient(45deg,rgba(201,162,75,.4) 0 1px,transparent 1px 18px),repeating-linear-gradient(-45deg,rgba(201,162,75,.4) 0 1px,transparent 1px 18px);'}),
     // Gradient overlay — top transparent, bottom dark
@@ -710,7 +715,6 @@ function renderHeader(tr,ar,ac,acd,acl,hf){
     ),
     h('div',{style:'display:flex;align-items:center;gap:8px;'},
       h('button',{style:`font-family:'${hf}',serif;font-size:13px;font-weight:600;border:1px solid rgba(52,51,31,.2);background:transparent;color:#43412a;padding:6px 12px;border-radius:20px;cursor:pointer;`,onClick:()=>setState({lang:ar?'en':'ar'})},tr.langBtn),
-      h('button',{style:`font-family:'Tajawal',sans-serif;font-size:12px;font-weight:700;border:1px solid ${acd};background:rgba(176,132,58,.12);color:${acd};padding:8px 13px;border-radius:20px;cursor:pointer;`,onClick:openWhatsContractors},tr.contractors),
       h('button',{style:`display:flex;align-items:center;gap:5px;background:#25785a;color:#fff;border:0;padding:7px 12px;border-radius:20px;font-family:'Tajawal',sans-serif;font-weight:700;font-size:12px;cursor:pointer;box-shadow:0 4px 10px rgba(37,120,90,.3);`,onClick:openWhats},
         h('span',{style:'width:7px;height:7px;border-radius:50%;background:#7fe3b8;',className:'pulse'}),tr.whatsapp
       )
@@ -1153,6 +1157,18 @@ function renderOffer(tr,ar,ac,acd,acl,hf){
 // ============================================================
 function renderContact(tr,ar,ac,acd,acl,hf){
   return h('section',{style:'padding:6px 18px 30px;'},
+    // Contractors card
+    h('div',{style:`position:relative;background:linear-gradient(135deg,${ac},${acd});border-radius:18px;padding:18px 20px;color:#fff;overflow:hidden;margin-bottom:16px;`},
+      h('div',{style:'position:absolute;inset:0;opacity:.16;background-image:repeating-linear-gradient(45deg,#fff 0 1px,transparent 1px 16px),repeating-linear-gradient(-45deg,#fff 0 1px,transparent 1px 16px);'}),
+      h('div',{style:'position:relative;'},
+        h('div',{style:'display:flex;align-items:center;gap:8px;margin-bottom:7px;'},
+          h('span',{style:'font-size:18px;'},'🏗️'),
+          h('h3',{style:`font-family:'${hf}',serif;font-size:18px;margin:0;`},tr.contractorsTitle)
+        ),
+        h('p',{style:'margin:0 0 14px;font-size:13px;line-height:1.6;opacity:.95;'},tr.contractorsDesc),
+        h('button',{style:`background:#fff;color:${acd};border:0;padding:11px 22px;border-radius:22px;font-family:'Tajawal',sans-serif;font-weight:800;font-size:13px;cursor:pointer;box-shadow:0 6px 16px rgba(0,0,0,.18);`,onClick:openWhatsContractors},tr.contractorsCta)
+      )
+    ),
     h('div',{style:'background:#34331f;border-radius:18px;padding:20px;color:#f6f0e3;'},
       h('h3',{style:`font-family:'${hf}',serif;font-size:19px;margin:0 0 14px;`},tr.contactTitle),
       h('div',{style:'display:flex;flex-direction:column;gap:13px;'},
@@ -1255,7 +1271,6 @@ PRODUCTS.forEach(p=>{
 });
 
 render();
-startCycle();
 </script>
 </body>
 </html>
