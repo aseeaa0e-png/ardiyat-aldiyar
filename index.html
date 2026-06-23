@@ -269,10 +269,13 @@ function getHeadingFont(){
 function getPatOpacity(){ return S.vibe==='عصري مينمال'?'.12':'.5'; }
 function getPatDOpacity(){ return S.vibe==='عصري مينمال'?'.06':'.18'; }
 
-function openWhats(){ window.open('https://wa.me/966553353448','_blank'); }
+// ⚙️ رقم واتساب المعرض — غيّره فقط هنا (بصيغة 9665xxxxxxxx)
+const WHATSAPP_NUMBER='966553353448';
+
+function openWhats(){ window.open('https://wa.me/'+WHATSAPP_NUMBER,'_blank'); }
 function openWhatsContractors(){
   const msg=isAR()?'أبحث عن أسعار جملة وعينات لمشروعي':'I need wholesale prices and samples for my project';
-  window.open('https://wa.me/966553353448?text='+encodeURIComponent(msg),'_blank');
+  window.open('https://wa.me/'+WHATSAPP_NUMBER+'?text='+encodeURIComponent(msg),'_blank');
 }
 function goSection(id){
   const el=document.getElementById(id);
