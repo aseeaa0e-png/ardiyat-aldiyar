@@ -109,7 +109,7 @@ const STR = {
     arTabCam:'كاميرا حية',arTabDemo:'نموذج AR',arTabUpload:'ارفع صورتك',
     arUploadHint:'ارفع صورة غرفتك، ثم اسحب الخط الذهبي لتحديد أين تبدأ الأرضية.',arDragLabel:'اسحب لتحديد الحافة',
     arPick:'اختر صورة',arSave:'احفظ النتيجة',arCamStart:'تشغيل الكاميرا',
-    arCamDenied:'ما قدرنا نفتح الكاميرا — جرّب «نموذج AR» أو «ارفع صورتك».',
+    arCamDenied:'ما قدرنا نفتح الكاميرا — جرّب «ارفع صورتك» بدلاً من ذلك.',
     advisorEyebrow:'المستشار الذكي',advisorTitle:'دع التقنية الذكية تختار لك',advisorSub:'٤ أسئلة سريعة، ونرشّح لك أفضل ٣ أرضيات بنسبة توافق وسبب واضح.',
     advisorResultTitle:'ترشيحاتك',advisorMatch:'توافق',advisorRestart:'من جديد',
     colorTitle:'كاشف اللون من صورتك',colorSub:'ارفع صورة لجدار غرفتك، ونحلل اللون السائد ونختار الأقرب.',
@@ -137,7 +137,7 @@ const STR = {
     arTabCam:'Live camera',arTabDemo:'AR demo',arTabUpload:'Upload photo',
     arUploadHint:'Upload a photo of your room, then drag the gold line to where the floor starts.',arDragLabel:'Drag to set edge',
     arPick:'Choose image',arSave:'Save result',arCamStart:'Start camera',
-    arCamDenied:"Couldn't open the camera — try \"AR demo\" or \"Upload photo\".",
+    arCamDenied:"Couldn't open the camera — try \"Upload photo\" instead.",
     advisorEyebrow:'Smart advisor',advisorTitle:'Let smart tech choose for you',advisorSub:'4 quick questions, and we recommend your top 3 floors with a match score and clear reason.',
     advisorResultTitle:'Your matches',advisorMatch:'match',advisorRestart:'Start over',
     colorTitle:'Color detector',colorSub:'Upload a photo of your wall, we read the dominant color and pick the closest floor.',
@@ -610,7 +610,6 @@ function renderAR(tr,ar,ac,acd,acl,hf,side,sideAlt){
   return h('section',{id:'ar',style:'padding:26px 18px;background:#2b281f;color:#f6f0e3;position:relative;'},
     h('div',{style:`position:absolute;inset:0;opacity:${patD};background-image:repeating-linear-gradient(45deg,rgba(201,162,75,.5) 0 1px,transparent 1px 20px),repeating-linear-gradient(-45deg,rgba(201,162,75,.5) 0 1px,transparent 1px 20px);`}),
     h('div',{style:'position:relative;'},
-      h('div',{style:`font-size:11px;font-weight:700;color:${acl};letter-spacing:1px;margin-bottom:6px;`},'AR · '+tr.arEyebrow),
       h('h2',{style:`font-family:'${hf}',serif;font-size:23px;margin:0 0 6px;color:#f6f0e3;`},tr.arTitle),
       h('p',{style:'margin:0 0 16px;font-size:13px;color:#cabfa3;line-height:1.6;'},tr.arSub),
       // Tabs
@@ -651,7 +650,7 @@ function renderAR(tr,ar,ac,acd,acl,hf,side,sideAlt){
           h('div',{style:`position:absolute;bottom:0;left:0;width:22px;height:22px;border-bottom:2px solid ${acl};border-left:2px solid ${acl};`}),
           h('div',{style:`position:absolute;bottom:0;right:0;width:22px;height:22px;border-bottom:2px solid ${acl};border-right:2px solid ${acl};`}),
           h('div',{style:`position:absolute;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,${acl},transparent);`,className:'scan'}),
-          h('div',{style:`position:absolute;top:6px;right:6px;background:rgba(201,162,75,.92);color:#2b281f;font-size:10px;font-weight:800;padding:3px 8px;border-radius:10px;`},'AR LIVE')
+          h('div',{style:`position:absolute;top:6px;right:6px;background:rgba(201,162,75,.92);color:#2b281f;font-size:10px;font-weight:800;padding:3px 8px;border-radius:10px;`},isAR()?'مباشر':'LIVE')
         ):null,
         // Drag handle
         ((isUpload&&S.arImage)||(isCam&&camOn))?h('div',{
