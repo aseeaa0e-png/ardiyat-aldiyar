@@ -548,7 +548,7 @@ function renderVideoHero(tr,ar,ac,acd,acl,hf){
       h('div',{style:`width:48px;height:2px;background:linear-gradient(90deg,transparent,${acl},transparent);margin-bottom:22px;`}),
       // CTAs
       h('div',{style:'display:flex;gap:10px;width:100%;'},
-        h('button',{style:`flex:1;background:linear-gradient(135deg,${ac},${acd});color:#fff;border:0;padding:13px;border-radius:13px;font-family:'Tajawal',sans-serif;font-weight:700;font-size:13.5px;cursor:pointer;box-shadow:0 8px 22px rgba(138,99,38,.5);`,
+        h('button',{style:`flex:1;background:#fff;color:${acd};border:0;padding:13px;border-radius:13px;font-family:'Tajawal',sans-serif;font-weight:800;font-size:13.5px;cursor:pointer;box-shadow:0 8px 24px rgba(0,0,0,.38);`,
           onClick:()=>goSection('ar')},tr.ctaTry),
         h('button',{style:`flex:1;background:rgba(239,231,214,.1);color:#f6f0e3;border:1px solid rgba(201,162,75,.45);padding:13px;border-radius:13px;font-family:'Tajawal',sans-serif;font-weight:700;font-size:13.5px;cursor:pointer;backdrop-filter:blur(6px);`,
           onClick:()=>goSection('advisor')},tr.ctaAdvisor)
