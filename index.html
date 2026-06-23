@@ -45,6 +45,21 @@ select,input{font-family:'Tajawal',sans-serif;}
 <div id="app"></div>
 <script>
 // ============================================================
+// ⚙️ CONFIG — كل إعدادات المعرض في مكان واحد. عدّل هنا فقط.
+// ============================================================
+const CONFIG = {
+  whatsapp : '966553353448',        // رقم الواتساب بصيغة 9665xxxxxxxx
+  accent   : 'نحاسي',                // اللون الرئيسي: نحاسي | زيتوني | طيني
+  rating   : '4.9',                  // التقييم
+  reviews  : '312',                  // عدد التقييمات
+  brand    : { ar:'أرضيات الديار',          en:'Al-Diyar Floors' },
+  address  : { ar:'حي الياسمين، الرياض',    en:'Al-Yasmin, Riyadh' },
+  hours    : { ar:'السبت–الخميس ٩ص–١٠م',   en:'Sat–Thu 9am–10pm' },
+  footer   : { ar:'تجربة أرضيات أذكى.',     en:'A smarter way to floor.' },
+  // ملاحظة: عنوان التبويب ووسوم المشاركة (og) موجودة في <head> بأعلى الملف — تُعدّل يدوياً.
+};
+
+// ============================================================
 // STATE
 // ============================================================
 const S = {
@@ -70,7 +85,7 @@ const S = {
   chatMsgs:[{role:'bot',key:'welcome'}],
   zoom:null,
   tex:{},
-  accent:'نحاسي',
+  accent:CONFIG.accent,
   vibe:'تراثي دافئ',
 };
 
@@ -100,7 +115,7 @@ function prod(id){ return PRODUCTS.find(p=>p.id===id); }
 
 const STR = {
   ar:{
-    brand:'أرضيات الديار',langBtn:'EN',whatsapp:'واتساب',contractors:'للمقاولين',
+    brand:CONFIG.brand.ar,langBtn:'EN',whatsapp:'واتساب',contractors:'للمقاولين',
     contractorsTitle:'للمقاولين والمصممين',contractorsDesc:'أسعار جملة خاصة، حساب الكميات، وعيّنات مجانية لمشاريعك.',contractorsCta:'تواصل لعرض الجملة',
     heroEyebrow:'معاينة حيّة بتقنية ذكية',heroTitle:'شوف أرضيتك قبل ما تشتريها',
     heroSub:'بدّل الأرضية بضغطة، جرّبها بصورة غرفتك، وخلّ التقنية الذكية ترشّح لك الأنسب.',
@@ -121,14 +136,14 @@ const STR = {
     compareTitle:'قارن واختار',compareCat:'مقارنة الفئات',compareCustom:'مقارنة مخصصة',compareVs:'مقابل',compareVerdict:'الخلاصة',
     whyTitle:'ليش الديار؟',testiTitle:'آراء عملائنا',
     offerTitle:'عرض محدود',offerText:'معاينة وتصميم أرضيتك بالكامل',offerWas:'٢٥٠ ر.س',offerNow:'مجانًا',offerCta:'احجز الآن',
-    contactTitle:'تواصل معنا',addressLabel:'العنوان',address:'حي الياسمين، الرياض',hoursLabel:'ساعات العمل',hours:'السبت–الخميس ٩ص–١٠م',ratingLabel:'التقييم',reviews:'تقييم',footerNote:'تجربة أرضيات أذكى.',
+    contactTitle:'تواصل معنا',addressLabel:'العنوان',address:CONFIG.address.ar,hoursLabel:'ساعات العمل',hours:CONFIG.hours.ar,ratingLabel:'التقييم',reviews:'تقييم',footerNote:CONFIG.footer.ar,
     chatTitle:'مساعد الديار',chatOnline:'متصل الآن',chatPlaceholder:'اكتب سؤالك...',chatToWA:'أكمل على واتساب',chatWelcome:'هلا! اسألني عن الأسعار، التركيب، الضمان، أو احجز موعد.',
     zoomBadge:'تكبير ×٢',zoomClose:'إغلاق',
     chipPrices:'الأسعار',chipWarranty:'الضمان',chipBook:'احجز موعد',
     chipPricesQ:'كم الأسعار؟',chipWarrantyQ:'وش الضمان؟',chipBookQ:'أبي أحجز موعد',
   },
   en:{
-    brand:'Al-Diyar Floors',langBtn:'ع',whatsapp:'WhatsApp',contractors:'For Contractors',
+    brand:CONFIG.brand.en,langBtn:'ع',whatsapp:'WhatsApp',contractors:'For Contractors',
     contractorsTitle:'For Contractors & Designers',contractorsDesc:'Special wholesale pricing, quantity estimation, and free samples for your projects.',contractorsCta:'Contact for wholesale',
     heroEyebrow:'Smart live preview',heroTitle:'See your floor before you buy it',
     heroSub:"Swap floors in a tap, try them in a photo of your room, and let smart tech pick your best match.",
@@ -149,7 +164,7 @@ const STR = {
     compareTitle:'Compare & choose',compareCat:'Category comparison',compareCustom:'Custom compare',compareVs:'vs',compareVerdict:'Verdict',
     whyTitle:'Why Al-Diyar?',testiTitle:'What clients say',
     offerTitle:'Limited offer',offerText:'Full floor preview & design',offerWas:'250 SAR',offerNow:'Free',offerCta:'Book now',
-    contactTitle:'Visit us',addressLabel:'Address',address:'Al-Yasmin, Riyadh',hoursLabel:'Hours',hours:'Sat–Thu 9am–10pm',ratingLabel:'Rating',reviews:'reviews',footerNote:'A smarter way to floor.',
+    contactTitle:'Visit us',addressLabel:'Address',address:CONFIG.address.en,hoursLabel:'Hours',hours:CONFIG.hours.en,ratingLabel:'Rating',reviews:'reviews',footerNote:CONFIG.footer.en,
     chatTitle:'Al-Diyar assistant',chatOnline:'Online now',chatPlaceholder:'Type your question...',chatToWA:'Continue on WhatsApp',chatWelcome:"Hi! Ask me about prices, installation, warranty, or book a visit.",
     zoomBadge:'Zoom ×2',zoomClose:'Close',
     chipPrices:'Prices',chipWarranty:'Warranty',chipBook:'Book',
@@ -269,13 +284,10 @@ function getHeadingFont(){
 function getPatOpacity(){ return S.vibe==='عصري مينمال'?'.12':'.5'; }
 function getPatDOpacity(){ return S.vibe==='عصري مينمال'?'.06':'.18'; }
 
-// ⚙️ رقم واتساب المعرض — غيّره فقط هنا (بصيغة 9665xxxxxxxx)
-const WHATSAPP_NUMBER='966553353448';
-
-function openWhats(){ window.open('https://wa.me/'+WHATSAPP_NUMBER,'_blank'); }
+function openWhats(){ window.open('https://wa.me/'+CONFIG.whatsapp,'_blank'); }
 function openWhatsContractors(){
   const msg=isAR()?'أبحث عن أسعار جملة وعينات لمشروعي':'I need wholesale prices and samples for my project';
-  window.open('https://wa.me/'+WHATSAPP_NUMBER+'?text='+encodeURIComponent(msg),'_blank');
+  window.open('https://wa.me/'+CONFIG.whatsapp+'?text='+encodeURIComponent(msg),'_blank');
 }
 function goSection(id){
   const el=document.getElementById(id);
@@ -995,7 +1007,7 @@ function renderContact(tr,ar,ac,acd,acl,hf){
     h('div',{style:'background:#34331f;border-radius:18px;padding:20px;color:#f6f0e3;'},
       h('h3',{style:`font-family:'${hf}',serif;font-size:19px;margin:0 0 14px;`},tr.contactTitle),
       h('div',{style:'display:flex;flex-direction:column;gap:13px;'},
-        ...[['📍',tr.addressLabel,tr.address],['🕘',tr.hoursLabel,tr.hours],['⭐',tr.ratingLabel,'4.9 · 312 '+tr.reviews]].map(([icon,label,val])=>
+        ...[['📍',tr.addressLabel,tr.address],['🕘',tr.hoursLabel,tr.hours],['⭐',tr.ratingLabel,CONFIG.rating+' · '+CONFIG.reviews+' '+tr.reviews]].map(([icon,label,val])=>
           h('div',{style:'display:flex;gap:11px;align-items:flex-start;'},
             h('div',{style:'width:30px;height:30px;border-radius:9px;background:rgba(201,162,75,.18);display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0;'},icon),
             h('div',null,h('div',{style:'font-size:10px;color:#9d9176;'},label),h('div',{style:'font-size:13.5px;font-weight:600;'},val))
