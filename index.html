@@ -355,9 +355,9 @@ function onArUpload(e){
 async function startCam(){
   try{
     const st=await navigator.mediaDevices.getUserMedia({video:{facingMode:'environment'}});
-    _stream=st;setState({arCamState:'on'},()=>{
-      const v=document.getElementById('ar-video');if(v)v.srcObject=st;
-    });
+    _stream=st;
+    setState({arCamState:'on'});
+    setTimeout(()=>{const v=document.getElementById('ar-video');if(v){v.srcObject=st;v.play().catch(()=>{});}},40);
   }catch(err){setState({arCamState:'denied'});}
 }
 function saveAR(){
@@ -513,7 +513,7 @@ function render(){
   // restore video stream
   if(S.arTab==='camera'&&S.arCamState==='on'){
     const v=document.getElementById('ar-video');
-    if(v&&_stream)v.srcObject=_stream;
+    if(v&&_stream){v.srcObject=_stream;v.play().catch(()=>{});}
   }
   // restore upload image
   if(S.arTab==='upload'&&S.arImage){
@@ -650,7 +650,7 @@ function renderAR(tr,ar,ac,acd,acl,hf,side,sideAlt){
         ):null,
         // Floor overlay
         ((isUpload&&S.arImage)||(isCam&&camOn)||isDemo)?h('div',{style:`position:absolute;left:0;right:0;bottom:0;top:${S.arLinePct}%;overflow:hidden;`},
-          h('div',{style:`position:absolute;left:-30%;right:-30%;top:0;bottom:0;transform:perspective(360px) rotateX(64deg);transform-origin:top center;background-color:${afp.color};${texFor(afp.id)?`background-image:url(${texFor(afp.id)});background-size:cover;`:''}mix-blend-mode:multiply;opacity:.92;`}),
+          h('div',{style:`position:absolute;left:-30%;right:-30%;top:0;bottom:0;transform:perspective(360px) rotateX(64deg);transform-origin:top center;background-color:${afp.color};${texFor(afp.id)?`background-image:url(${texFor(afp.id)});background-size:cover;`:''}opacity:.82;`}),
           h('div',{style:'position:absolute;inset:0;background:linear-gradient(0deg,rgba(0,0,0,.25),transparent 60%);'})
         ):null,
         // HUD
@@ -663,7 +663,7 @@ function renderAR(tr,ar,ac,acd,acl,hf,side,sideAlt){
           h('div',{style:`position:absolute;top:6px;right:6px;background:rgba(201,162,75,.92);color:#2b281f;font-size:10px;font-weight:800;padding:3px 8px;border-radius:10px;`},'AR LIVE')
         ):null,
         // Drag handle
-        isUpload&&S.arImage?h('div',{
+        ((isUpload&&S.arImage)||(isCam&&camOn)||isDemo)?h('div',{
           style:`position:absolute;left:0;right:0;top:${S.arLinePct}%;height:30px;transform:translateY(-50%);cursor:ns-resize;display:flex;align-items:center;z-index:5;`,
           onPointerdown:startLineDrag
         },
