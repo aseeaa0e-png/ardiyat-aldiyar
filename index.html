@@ -56,6 +56,7 @@ const CONFIG = {
   address  : { ar:'حي الياسمين، الرياض',    en:'Al-Yasmin, Riyadh' },
   hours    : { ar:'السبت–الخميس ٩ص–١٠م',   en:'Sat–Thu 9am–10pm' },
   footer   : { ar:'تجربة أرضيات أذكى.',     en:'A smarter way to floor.' },
+  installments : { enabled:true, tabby:true, tamara:true },  // التقسيط: تشغيل/إيقاف ومزوّدوه
   // ملاحظة: عنوان التبويب ووسوم المشاركة (og) موجودة في <head> بأعلى الملف — تُعدّل يدوياً.
 };
 
@@ -133,6 +134,7 @@ const STR = {
     catCalc:'احسب',catCompare:'قارن',catAll:'الكل',
     calcTitle:'حاسبة التكلفة',calcSub:'اختر المنتج وأدخل المساحة، يطلع لك السعر فورًا.',
     calcProduct:'المنتج',calcArea:'المساحة (م²)',calcMaterial:'الخامة',calcInstall:'التركيب',calcTotal:'الإجمالي',calcQuote:'حمّل عرض السعر',
+    bnplTitle:'قسّمها على ٤ دفعات بدون فوائد',bnplWith:'متوفر مع',bnplPerMonth:'تقريبًا/دفعة',
     compareTitle:'قارن واختار',compareCat:'مقارنة الفئات',compareCustom:'مقارنة مخصصة',compareVs:'مقابل',compareVerdict:'الخلاصة',
     whyTitle:'ليش الديار؟',testiTitle:'آراء عملائنا',
     offerTitle:'عرض محدود',offerText:'معاينة وتصميم أرضيتك بالكامل',offerWas:'٢٥٠ ر.س',offerNow:'مجانًا',offerCta:'احجز الآن',
@@ -161,6 +163,7 @@ const STR = {
     catCalc:'Calc',catCompare:'Compare',catAll:'All',
     calcTitle:'Cost calculator',calcSub:'Pick a product, enter the area, get the price instantly.',
     calcProduct:'Product',calcArea:'Area (m²)',calcMaterial:'Material',calcInstall:'Installation',calcTotal:'Total',calcQuote:'Download quote',
+    bnplTitle:'Split into 4 interest-free payments',bnplWith:'Available with',bnplPerMonth:'approx/payment',
     compareTitle:'Compare & choose',compareCat:'Category comparison',compareCustom:'Custom compare',compareVs:'vs',compareVerdict:'Verdict',
     whyTitle:'Why Al-Diyar?',testiTitle:'What clients say',
     offerTitle:'Limited offer',offerText:'Full floor preview & design',offerWas:'250 SAR',offerNow:'Free',offerCta:'Book now',
@@ -195,6 +198,7 @@ const FAQ = [
   {k:['spc','اس بي سي'],ar:'SPC أرضية مقاومة ماء وخدش، دافئة تحت القدم، وأسعارها اقتصادية — من ٤٥ ر.س/م².',en:'SPC is water- and scratch-resistant, warm underfoot, and budget-friendly — from 45 SAR/m².'},
   {k:['لون','ألوان','color','colour'],ar:'جرّب «كاشف اللون» وارفع صورة جدارك — نختار لك الأرضية الأقرب تلقائيًا.',en:'Try the "Color detector" and upload a wall photo — we auto-pick the closest floor.'},
   {k:['عرض','خصم','offer','discount'],ar:'عرض حالي: معاينة وتصميم أرضيتك مجانًا (بدل ٢٥٠ ر.س). احجز قبل نهاية الشهر.',en:'Current offer: free floor preview & design (worth 250 SAR). Book before month-end.'},
+  {k:['تقسيط','اقساط','تابي','تمارا','دفعات','tabby','tamara','installment','split','later'],ar:'نعم! تقدر تقسّط أرضيتك على ٤ دفعات بدون فوائد عبر تابي أو تمارا — أدخل المساحة في الحاسبة وتشوف قيمة الدفعة تقريبًا.',en:'Yes! You can split your floor into 4 interest-free payments via Tabby or Tamara — enter your area in the calculator to see the approximate per-payment amount.'},
   {k:['وين','موقع','عنوان','where','location','address'],ar:'معرضنا في حي الياسمين، الرياض. السبت–الخميس ٩ص–١٠م.',en:'Our showroom is in Al-Yasmin, Riyadh. Sat–Thu 9am–10pm.'},
 ];
 
@@ -858,7 +862,37 @@ function renderCalculator(tr,ar,ac,acd,acl,hf){
           h('span',{style:`font-family:'${hf}',serif;font-size:22px;font-weight:700;color:${acd};`},fmt((cp.price+cp.install)*area))
         )
       ),
+      CONFIG.installments&&CONFIG.installments.enabled?renderBnpl(tr,ar,ac,acd,acl,(cp.price+cp.install)*area):null,
       h('button',{style:`width:100%;margin-top:14px;background:linear-gradient(135deg,${ac},${acd});color:#fff;border:0;padding:13px;border-radius:12px;font-family:'Tajawal',sans-serif;font-weight:700;font-size:14px;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;box-shadow:0 10px 22px -10px rgba(138,99,38,.55);`,onClick:downloadQuote},'⬇ '+tr.calcQuote)
+    )
+  );
+}
+
+// ============================================================
+// BNPL (Tabby / Tamara installments)
+// ============================================================
+function renderBnpl(tr,ar,ac,acd,acl,total){
+  const per=total>0?fmt(total/4):null;
+  const tabbyPill=h('span',{style:'display:inline-flex;align-items:center;gap:5px;background:#fff;border:1px solid rgba(52,51,31,.12);padding:5px 11px;border-radius:9px;box-shadow:0 2px 6px rgba(43,40,31,.08);'},
+    h('span',{style:'width:8px;height:8px;border-radius:50%;background:#3ddc97;'}),
+    h('span',{style:'font-weight:800;font-size:13px;color:#1f9d7b;letter-spacing:-.3px;'},'tabby')
+  );
+  const tamaraPill=h('span',{style:'display:inline-flex;align-items:center;gap:5px;background:#fff;border:1px solid rgba(52,51,31,.12);padding:5px 11px;border-radius:9px;box-shadow:0 2px 6px rgba(43,40,31,.08);'},
+    h('span',{style:'width:8px;height:8px;border-radius:50%;background:#f08bb0;'}),
+    h('span',{style:'font-weight:800;font-size:13px;color:#e2497f;letter-spacing:-.3px;'},'tamara')
+  );
+  return h('div',{style:'margin-top:14px;background:#faf6ec;border:1px dashed rgba(52,51,31,.18);border-radius:13px;padding:12px 14px;'},
+    h('div',{style:'display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:9px;'},
+      h('div',{style:'display:flex;align-items:center;gap:7px;'},
+        h('span',{style:'font-size:15px;'},'💳'),
+        h('span',{style:'font-size:12.5px;font-weight:700;color:#2b281f;'},tr.bnplTitle)
+      ),
+      per?h('span',{style:`font-size:12px;font-weight:800;color:${acd};white-space:nowrap;`},per+' '+tr.bnplPerMonth):null
+    ),
+    h('div',{style:'display:flex;align-items:center;gap:8px;flex-wrap:wrap;'},
+      h('span',{style:'font-size:11px;color:#6b6450;'},tr.bnplWith),
+      CONFIG.installments.tabby?tabbyPill:null,
+      CONFIG.installments.tamara?tamaraPill:null
     )
   );
 }
