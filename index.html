@@ -40,16 +40,19 @@ select,input{font-family:'Tajawal',sans-serif;}
 .scan{animation:diyScan 2.6s ease-in-out infinite alternate;}
 .shimmer{animation:diyShimmer 2.8s ease-in-out infinite;}
 
-/* زر العودة إلى بوابة الجولة في كامن — عنصر مستقل عن الديمو */
-.kamen-return{position:fixed;bottom:16px;left:50%;transform:translateX(-50%);z-index:55;display:inline-flex;align-items:center;gap:7px;background:#12233a;color:#e9c97e;border:1px solid rgba(47,182,172,.55);padding:9px 16px;border-radius:24px;font-family:'Tajawal',sans-serif;font-weight:700;font-size:12.5px;text-decoration:none;box-shadow:0 8px 22px -6px rgba(0,0,0,.5);white-space:nowrap;transition:transform .15s ease,box-shadow .15s ease;}
-.kamen-return:hover{box-shadow:0 12px 28px -6px rgba(0,0,0,.6);border-color:rgba(47,182,172,.9);}
-.kamen-return:active{transform:translateX(-50%) scale(.96);}
-.kamen-return .kr-arrow{color:#2fb6ac;font-weight:800;}
+/* زر العودة إلى بوابة الجولة في كامن — عنصر ثابت مستقل عن الديمو */
+/* ملاحظة: أعلى اليسار يتصادم مع زر واتساب/اللغة في الهيدر (RTL) على الجوال — اختُبر ورُصد التصادم فعليًا،
+   لذا وُضع أسفل المنتصف: الموضع الوحيد المؤكَّد خلوّه من أي تداخل على كل الأحجام. */
+.kamen-tour-back{position:fixed !important;bottom:16px !important;left:50% !important;top:auto !important;right:auto !important;transform:translateX(-50%);z-index:99999 !important;display:inline-block;background:#161D2D;color:#E6C57A;border:1px solid rgba(230,197,122,.45);border-radius:999px;padding:10px 16px;font-family:'Tajawal',sans-serif;font-weight:800;font-size:14px;text-decoration:none;box-shadow:0 10px 30px rgba(0,0,0,.18);white-space:nowrap;line-height:1.2;}
+.kamen-tour-back:hover{box-shadow:0 12px 34px rgba(0,0,0,.28);}
+@media (max-width:640px){
+  .kamen-tour-back{bottom:12px !important;padding:9px 13px;font-size:13px;}
+}
 </style>
 </head>
 <body>
+<a class="kamen-tour-back" href="https://aseeaa0e-png.github.io/kamen-digital/demo.html" title="العودة إلى بوابة الجولة في كامن">← العودة إلى بوابة الجولة</a>
 <div id="app"></div>
-<a class="kamen-return" href="https://aseeaa0e-png.github.io/kamen-digital/demo.html" title="العودة إلى بوابة الجولة في كامن"><span class="kr-arrow">←</span> العودة إلى بوابة الجولة</a>
 <script>
 // ============================================================
 // ⚙️ CONFIG — كل إعدادات المعرض في مكان واحد. عدّل هنا فقط.
