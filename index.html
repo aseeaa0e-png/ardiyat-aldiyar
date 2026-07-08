@@ -68,6 +68,9 @@ const CONFIG = {
   footer   : { ar:'تجربة أرضيات أذكى.',     en:'A smarter way to floor.' },
   installments : { enabled:true, tabby:true, tamara:true },  // التقسيط: تشغيل/إيقاف ومزوّدوه
   quoteFormUrl : 'https://docs.google.com/forms/d/e/1FAIpQLSeWKMMU11H9rICjedIGSikHXaIZXtulyt9Hg5NRZeNUYgmfwg/viewform?usp=sharing&ouid=104347590942942539138', // نموذج طلب عرض السعر — يسجَّل كل طلب هنا
+  // تعبئة تلقائية (اختياري): عرّف رقم كل حقل (entry.XXXXXXXXX من نموذجك) لتُملأ تلقائيًا عند فتح النموذج.
+  // اتركها فارغة '' إذا لا تريد التعبئة التلقائية — الزر يعمل برابط عادي بدون مشاكل.
+  quoteFormEntries : { product:'', area:'', price:'' },
   // ملاحظة: عنوان التبويب ووسوم المشاركة (og) موجودة في <head> بأعلى الملف — تُعدّل يدوياً.
 };
 
@@ -307,6 +310,19 @@ function openWhatsContractors(){
 function goSection(id){
   const el=document.getElementById(id);
   if(el){ const top=el.getBoundingClientRect().top+window.scrollY-70; window.scrollTo({top,behavior:'smooth'}); }
+}
+
+// يبني رابط نموذج طلب عرض السعر — يملأ الحقول تلقائيًا إذا أُدخلت أرقامها في CONFIG.quoteFormEntries،
+// وإلا يرجع الرابط العادي كما هو (بدون كسر أي شيء).
+function buildQuoteFormUrl(product,area,price){
+  const en=CONFIG.quoteFormEntries||{};
+  if(!en.product||!en.area||!en.price) return CONFIG.quoteFormUrl;
+  const base=CONFIG.quoteFormUrl.split('?')[0];
+  const params=new URLSearchParams({usp:'pp_url'});
+  params.set('entry.'+en.product,product);
+  params.set('entry.'+en.area,area);
+  params.set('entry.'+en.price,price);
+  return base+'?'+params.toString();
 }
 
 function answerFor(text){
@@ -839,7 +855,7 @@ function renderCalculator(tr,ar,ac,acd,acl,hf){
         )
       ),
       CONFIG.installments&&CONFIG.installments.enabled?renderBnpl(tr,ar,ac,acd,acl,(cp.price+cp.install)*area):null,
-      h('a',{href:CONFIG.quoteFormUrl,target:'_blank',rel:'noopener',style:`width:100%;margin-top:14px;background:linear-gradient(135deg,${ac},${acd});color:#fff;border:0;padding:13px;border-radius:12px;font-family:'Tajawal',sans-serif;font-weight:700;font-size:14px;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;box-shadow:0 10px 22px -10px rgba(138,99,38,.55);text-decoration:none;box-sizing:border-box;`},'📝 '+tr.calcQuote)
+      h('a',{href:buildQuoteFormUrl(pn(cp),area,Math.round((cp.price+cp.install)*area)),target:'_blank',rel:'noopener',style:`width:100%;margin-top:14px;background:linear-gradient(135deg,${ac},${acd});color:#fff;border:0;padding:13px;border-radius:12px;font-family:'Tajawal',sans-serif;font-weight:700;font-size:14px;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;box-shadow:0 10px 22px -10px rgba(138,99,38,.55);text-decoration:none;box-sizing:border-box;`},'📝 '+tr.calcQuote)
     )
   );
 }
