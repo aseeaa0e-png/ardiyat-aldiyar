@@ -67,6 +67,7 @@ const CONFIG = {
   hours    : { ar:'السبت–الخميس ٩ص–١٠م',   en:'Sat–Thu 9am–10pm' },
   footer   : { ar:'تجربة أرضيات أذكى.',     en:'A smarter way to floor.' },
   installments : { enabled:true, tabby:true, tamara:true },  // التقسيط: تشغيل/إيقاف ومزوّدوه
+  quoteFormUrl : 'https://docs.google.com/forms/d/e/1FAIpQLSeWKMMU11H9rICjedIGSikHXaIZXtulyt9Hg5NRZeNUYgmfwg/viewform?usp=sharing&ouid=104347590942942539138', // نموذج طلب عرض السعر — يسجَّل كل طلب هنا
   // ملاحظة: عنوان التبويب ووسوم المشاركة (og) موجودة في <head> بأعلى الملف — تُعدّل يدوياً.
 };
 
@@ -143,7 +144,7 @@ const STR = {
     catTitle:'الكتالوج',catSub:'١٢ منتج على ٤ فئات — اضغط الصورة للتكبير.',perM2:'ر.س/م²',
     catCalc:'احسب',catCompare:'قارن',catAll:'الكل',
     calcTitle:'حاسبة التكلفة',calcSub:'اختر المنتج وأدخل المساحة، يطلع لك السعر فورًا.',
-    calcProduct:'المنتج',calcArea:'المساحة (م²)',calcMaterial:'الخامة',calcInstall:'التركيب',calcTotal:'الإجمالي',calcQuote:'حمّل عرض السعر',
+    calcProduct:'المنتج',calcArea:'المساحة (م²)',calcMaterial:'الخامة',calcInstall:'التركيب',calcTotal:'الإجمالي',calcQuote:'اطلب عرض السعر',
     bnplTitle:'قسّمها على ٤ دفعات بدون فوائد',bnplWith:'متوفر مع',bnplPerMonth:'تقريبًا/دفعة',
     compareTitle:'قارن واختار',compareCat:'مقارنة الفئات',compareCustom:'مقارنة مخصصة',compareVs:'مقابل',compareVerdict:'الخلاصة',
     whyTitle:'ليش الديار؟',testiTitle:'آراء عملائنا',
@@ -172,7 +173,7 @@ const STR = {
     catTitle:'Catalog',catSub:'12 products across 4 categories — tap to zoom.',perM2:'SAR/m²',
     catCalc:'Calc',catCompare:'Compare',catAll:'All',
     calcTitle:'Cost calculator',calcSub:'Pick a product, enter the area, get the price instantly.',
-    calcProduct:'Product',calcArea:'Area (m²)',calcMaterial:'Material',calcInstall:'Installation',calcTotal:'Total',calcQuote:'Download quote',
+    calcProduct:'Product',calcArea:'Area (m²)',calcMaterial:'Material',calcInstall:'Installation',calcTotal:'Total',calcQuote:'Request a quote',
     bnplTitle:'Split into 4 interest-free payments',bnplWith:'Available with',bnplPerMonth:'approx/payment',
     compareTitle:'Compare & choose',compareCat:'Category comparison',compareCustom:'Custom compare',compareVs:'vs',compareVerdict:'Verdict',
     whyTitle:'Why Al-Diyar?',testiTitle:'What clients say',
@@ -430,41 +431,6 @@ function onColorUpload(e){
       setState({colorImg:ev.target.result,colorDom:hex,colorMatch:best.id});
     };im.src=ev.target.result;
   };rd.readAsDataURL(f);
-}
-
-// ============================================================
-// QUOTE DOWNLOAD
-// ============================================================
-function downloadQuote(){
-  const p=prod(S.calcProductId);const area=parseFloat(S.calcArea)||0;
-  const mat=p.price*area,inst=p.install*area,total=mat+inst;
-  const W=900,H=1200,c=document.createElement('canvas');c.width=W;c.height=H;const x=c.getContext('2d');
-  x.fillStyle='#efe7d6';x.fillRect(0,0,W,H);
-  x.fillStyle='#34331f';x.fillRect(0,0,W,150);
-  x.fillStyle='#c9a24b';x.font='bold 46px Tajawal,sans-serif';x.textAlign='left';
-  x.fillText(t().brand,60,95);
-  x.fillStyle='#cabfa3';x.font='22px Tajawal,sans-serif';x.fillText(isAR()?'عرض سعر مبدئي':'Price Quote',60,128);
-  const tx=new Image();tx.onload=()=>{
-    x.save();x.beginPath();if(x.roundRect)x.roundRect(60,200,200,200,18);else x.rect(60,200,200,200);x.clip();x.drawImage(tx,60,200,200,200);x.restore();
-    finish();
-  };tx.onerror=finish;tx.src=texFor(p.id)||'';
-  function finish(){
-    x.fillStyle='#2b281f';x.textAlign=isAR()?'right':'left';const tx0=isAR()?W-60:300;
-    x.font='bold 38px Tajawal,sans-serif';x.fillText(pn(p),tx0,250);
-    x.fillStyle='#8a6326';x.font='26px Tajawal,sans-serif';x.fillText(p.price+' '+t().perM2,tx0,295);
-    x.fillStyle='#6b6450';x.font='22px Tajawal,sans-serif';x.fillText((isAR()?'المساحة: ':'Area: ')+area+' m²',tx0,340);
-    let y=480;x.textAlign='left';x.strokeStyle='rgba(52,51,31,.2)';
-    const rows=[[t().calcMaterial,mat],[t().calcInstall,inst]];
-    x.font='26px Tajawal,sans-serif';
-    rows.forEach(rw=>{x.fillStyle='#6b6450';x.fillText(rw[0],60,y);x.fillStyle='#2b281f';x.textAlign='right';x.fillText(Math.round(rw[1])+' SAR',W-60,y);x.textAlign='left';y+=58;x.beginPath();x.moveTo(60,y-30);x.lineTo(W-60,y-30);x.stroke();});
-    y+=20;x.fillStyle='#34331f';x.fillRect(60,y-10,W-120,90);
-    x.fillStyle='#f6f0e3';x.font='bold 30px Tajawal,sans-serif';x.fillText(t().calcTotal,90,y+48);
-    x.fillStyle='#c9a24b';x.textAlign='right';x.font='bold 40px Tajawal,sans-serif';x.fillText(Math.round(total)+' SAR',W-90,y+50);
-    x.textAlign='left';x.fillStyle='#6b6450';x.font='20px Tajawal,sans-serif';
-    x.fillText((isAR()?'صالح ٣٠ يوم · ':'Valid 30 days · ')+new Date().toLocaleDateString(),60,y+170);
-    x.fillText(t().address+' · '+t().hours,60,y+205);
-    const a=document.createElement('a');a.href=c.toDataURL('image/jpeg',0.92);a.download='diyar-quote.jpg';a.click();
-  }
 }
 
 // ============================================================
@@ -873,7 +839,7 @@ function renderCalculator(tr,ar,ac,acd,acl,hf){
         )
       ),
       CONFIG.installments&&CONFIG.installments.enabled?renderBnpl(tr,ar,ac,acd,acl,(cp.price+cp.install)*area):null,
-      h('button',{style:`width:100%;margin-top:14px;background:linear-gradient(135deg,${ac},${acd});color:#fff;border:0;padding:13px;border-radius:12px;font-family:'Tajawal',sans-serif;font-weight:700;font-size:14px;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;box-shadow:0 10px 22px -10px rgba(138,99,38,.55);`,onClick:downloadQuote},'⬇ '+tr.calcQuote)
+      h('a',{href:CONFIG.quoteFormUrl,target:'_blank',rel:'noopener',style:`width:100%;margin-top:14px;background:linear-gradient(135deg,${ac},${acd});color:#fff;border:0;padding:13px;border-radius:12px;font-family:'Tajawal',sans-serif;font-weight:700;font-size:14px;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;box-shadow:0 10px 22px -10px rgba(138,99,38,.55);text-decoration:none;box-sizing:border-box;`},'📝 '+tr.calcQuote)
     )
   );
 }
