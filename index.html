@@ -72,6 +72,9 @@ const CONFIG = {
   // "نوع الطلب" ← اسم المنتج، "المساحة التقريبية" ← المساحة، "ملاحظات إضافية" ← ملخص السعر.
   // (حقول الاسم/الجوال/المدينة تبقى فارغة ليملأها الزائر بنفسه.)
   quoteFormEntries : { requestType:'2077598569', area:'843791943', notes:'1925658790' },
+  // رابط Google Apps Script Web App لتسجيل الطلبات — ضعي Deployment URL هنا بعد النشر:
+  // مثال: https://script.google.com/macros/d/AKfycbZ.../usercallback?v=1
+  ordersApiUrl : '', // اتركيه فارغًا إذا لم تنشري Apps Script بعد (يستخدم Google Forms فقط)
   // ملاحظة: عنوان التبويب ووسوم المشاركة (og) موجودة في <head> بأعلى الملف — تُعدّل يدوياً.
 };
 
@@ -325,6 +328,24 @@ function buildQuoteFormUrl(product,area,priceNote){
   params.set('entry.'+en.area,area);
   params.set('entry.'+en.notes,priceNote);
   return base+'?'+params.toString();
+}
+
+// إرسال الطلب إلى Google Apps Script لتسجيله في Google Sheet
+async function sendToSheet(product,area,price){
+  if(!CONFIG.ordersApiUrl) return; // إذا لم يُعرَّف API URL، لا ترسل
+  try {
+    await fetch(CONFIG.ordersApiUrl, {
+      method:'POST',
+      body:JSON.stringify({
+        product:product,
+        area:area,
+        price:price,
+        createdAt:new Date().toISOString()
+      })
+    });
+  } catch(e) {
+    console.error('خطأ في إرسال الطلب إلى Google Sheet:', e);
+  }
 }
 
 function answerFor(text){
@@ -857,7 +878,7 @@ function renderCalculator(tr,ar,ac,acd,acl,hf){
         )
       ),
       CONFIG.installments&&CONFIG.installments.enabled?renderBnpl(tr,ar,ac,acd,acl,(cp.price+cp.install)*area):null,
-      h('a',{href:buildQuoteFormUrl(pn(cp),area,(isAR()?'السعر الإجمالي التقديري: ':'Estimated total price: ')+fmt((cp.price+cp.install)*area)),target:'_blank',rel:'noopener',style:`width:100%;margin-top:14px;background:linear-gradient(135deg,${ac},${acd});color:#fff;border:0;padding:13px;border-radius:12px;font-family:'Tajawal',sans-serif;font-weight:700;font-size:14px;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;box-shadow:0 10px 22px -10px rgba(138,99,38,.55);text-decoration:none;box-sizing:border-box;`},'📝 '+tr.calcQuote)
+      h('button',{onClick:()=>{sendToSheet(pn(cp),area,fmt((cp.price+cp.install)*area));window.open(buildQuoteFormUrl(pn(cp),area,(isAR()?'السعر الإجمالي التقديري: ':'Estimated total price: ')+fmt((cp.price+cp.install)*area)),'_blank');},style:`width:100%;margin-top:14px;background:linear-gradient(135deg,${ac},${acd});color:#fff;border:0;padding:13px;border-radius:12px;font-family:'Tajawal',sans-serif;font-weight:700;font-size:14px;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;box-shadow:0 10px 22px -10px rgba(138,99,38,.55);text-decoration:none;box-sizing:border-box;`},'📝 '+tr.calcQuote)
     )
   );
 }
